@@ -1,15 +1,13 @@
 package br.com.sunflowerstore.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
  * Created by rodrigo on 3/18/17.
  */
 @Entity
+@Table(name = "roles")
 public class Role {
 
 	@Id
@@ -17,6 +15,7 @@ public class Role {
 	private Long id;
 	private String role;
 	@ManyToMany
+	@Column(name = "accounts")
 	private Set<User> accounts;
 
 	public Long getId() {

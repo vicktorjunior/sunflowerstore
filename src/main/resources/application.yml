@@ -13,11 +13,15 @@ spring:
   jpa: 
     show-sql: true
     hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+#        dialect: org.hibernate.dialect.MySQL5Dialect
         ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:h2:~/dev;DB_CLOSE_ON_EXIT=FALSE
-    platform: h2
+    url: jdbc:postgresql://::1:5432/sunflowerdb
+    #platform: h2
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: admin
   multipart:
     maxFileSize: 1024KB
     maxRequestSize: 5MB
