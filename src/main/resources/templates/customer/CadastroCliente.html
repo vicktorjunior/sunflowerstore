@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+    <title th:text="#{customer.title}"></title>
+</head>
+<body>
+<section layout:fragment="conteudo" >
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1 th:text="#{customer.title}">
+            </h1>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <!--<div class="alert  alert-danger  alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <i class="fa  fa-exclamation-circle"></i> Já existe uma cerveja com o nome informado.
+        </div>-->
+
+        <form method="POST" th:object="${customer}" class="form-vertical  js-form-loading">
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="nome" th:text="#{customer.name}"></label>
+                    <input id="nome" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-4 form-group">
+                    <label for="tipoPessoa" th:text="#{customer.type}"></label>
+                    <div id="tipoPessoa">
+                        <div class="radio radio-inline">
+                            <input type="radio" name="tipoPessoa" id="fisica">
+                            <label for="fisica" th:text="#{customer.person}"></label>
+                        </div>
+                        <div class="radio radio-inline">
+                            <input type="radio" name="tipoPessoa" id="juridica">
+                            <label for="juridica" th:text="#{customer.company}"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="cpfcnpj" th:text="#{customer.identification}"></label>
+                        <input type="text" id="cpfcnpj" class="form-control">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-4 form-group">
+                    <label for="telefone" th:text="#{customer.phone}"></label>
+                    <input type="text" id="telefone" class="form-control">
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="email" th:text="#{customer.mail}">Email</label>
+                        <input type="text" id="email" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-4 form-group">
+                    <label for="logradouro" th:text="#{customer.street}">Logradouro</label>
+                    <input type="text" id="logradouro" class="form-control">
+                </div>
+
+                <div class="col-sm-4 form-group">
+                    <label for="numero" th:text="#{customer.number}">Numero</label>
+                    <input type="text" id="numero" class="form-control">
+                </div>
+
+                <div class="col-sm-4 form-group">
+                    <label for="complemento" th:text="#{customer.extra}">Complemento</label>
+                    <input type="text" id="complemento" class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-4 form-group">
+                    <label for="cep" th:text="#{customer.code}">CEP</label>
+                    <input type="text" id="cep" class="form-control js-decimal">
+                </div>
+
+                <div class="col-sm-4 form-group">
+                    <label for="estado" th:text="#{city.state}"></label>
+                    <select id="estado" class="form-control">
+                        <option th:text="#{city.select}"></option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4 form-group">
+                    <label for="cidade" th:text="#{city}">Cidade</label>
+                    <select id="cidade" class="form-control">
+                        <option th:text="#{customer.city.select}">Selecione a Cidade...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn  btn-primary" type="submit" th:text="#{save}">Salvar</button>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

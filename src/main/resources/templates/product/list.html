@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="'layout/LayoutPadrao'">
+
+<body>
+<section layout:fragment="conteudo">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h1 th:text="#{product.search}">
+
+                    </h1>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="aw-page-header-controls">
+                        <a class="btn btn-primary" th:href="@{/products/new}" >
+                            <i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm" th:text="#{home.products.new}"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <form method="get" class="form-vertical">
+
+            <div class="form-group">
+                <label for="input-product-nome" th:text="#{product.name}">Nome</label>
+                <input id="input-product-nome" type="text" class="form-control">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label th:text="#{product.pricesell}"></label>
+
+                        <div class="form-inline">
+                            <input type="text" class="form-control  aw-form-control-inline-sm" placeholder="R$">
+                            <label class="aw-form-label-between" th:text="#{between}"></label>
+                            <input type="text" class="form-control  aw-form-control-inline-sm" placeholder="R$">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label th:text="#{stock}"></label>
+
+                        <div class="form-inline">
+                            <input type="text" class="form-control  aw-form-control-inline-sm">
+                            <label class="aw-form-label-between" th:text="#{between}"></label>
+                            <input type="text" class="form-control  aw-form-control-inline-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn  btn-primary" type="submit" onclick="AW.showLoadingComponent(); return false;" th:text="#{search}">
+
+                </button>
+            </div>
+
+        </form>
+
+        <span th:if="${#lists.isEmpty(products)}"
+              th:text="#{product.listisempty}"> </span> <!-- TODO: RNG009 MSG006-->
+        <div class="box-body table-responsive no-padding"
+             th:if="!${#lists.isEmpty(products)}">
+            <table class="table table-hover cell-border" id="datatable">
+                <thead>
+                <tr>
+                    <th th:if="${action=='list'}"
+                        th:text="#{product.list.id}"></th>
+                    <th th:text="#{product.list.nome}"></th>
+                    <th th:text="#{product.list.supplier}"></th>
+                    <th th:text="#{product.list.precoCompra}"></th>
+                    <th th:text="#{product.list.options}"></th> <!--TODO: RNG001-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product: ${products}">
+                    <td th:if="${action=='list'}"
+                        th:text="${product.getCodigo()}"></td>
+                    <td th:text="${product.getNome()}"></td>
+                    <td th:text="${product.getSupplier().getNome()}"></td>
+                    <td class="js-decimal" th:text="${product.getPrecoCompra()}"></td>
+
+                    <!--<td th:text="${#dates.format(occurrence.dateInsert, 'dd/MM/yyyy')}"></td>-->
+
+                    <td>
+                        <!--<a sec:authorize="hasRole('ROLE_ADMIN')"
+                           th:href="@{|manage/${occurrence.id}|}"
+                           class="btn btn-default"
+                           th:text="#{occurrence.modal.manage.occurrence.button}"
+                           th:if="${action=='manage'}"></a>-->
+
+                        <a th:if="${action=='list'}"  class="btn btn-default" id="btn-edit"
+                           th:text="#{product.edit}" th:href="@{|edit/${product.codigo}|}" href="#">
+                        </a>
+
+                        <a href="#"
+
+                           class="btn btn-danger"
+                           th:text="#{product.delete}" id="btn-delete"
+                           th:if="${action=='list'}"
+                           th:href="@{|delete/${product.codigo}|}">
+                        </a>
+
+                        <a th:if="${action=='list'}"
+                                class="btn btn-info" id="btn-view"
+                                th:text="#{product.view}" th:href="@{|view/${product.codigo}|}" href="#">
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+</section>
+
+<th:block layout:fragment="css-view">
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/datatables/1.10.13/media/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/sweetalert/1.1.3/dist/sweetalert.css"/>
+</th:block>
+
+<th:block layout:fragment="js-view">
+<script
+        src="/webjars/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
+<script src="/webjars/sweetalert/1.1.3/dist/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable();
+
+    });
+
+    function confirmAlert(msg, redirectPage) {
+        swal({
+            title : msg,
+            type : "warning",
+            showCancelButton : true,
+            confirmButtonColor : "#DD6B55",
+            confirmButtonText : "Yes, delete it!",
+            cancelButtonText : "No, cancel.",
+            closeOnConfirm : false,
+            closeOnCancel : true
+        }, function(isConfirm) {
+            if (isConfirm) {
+                swal({
+                    title : "Deleted",
+                    type : "success",
+                    confirmButtonColor : "#00acd6",
+                    confirmButtonText : "Ok!",
+                    closeOnConfirm : false
+                }, function(isOk) {
+                    if (isOk) {
+                        window.location.href = redirectPage;
+                    }
+                });
+            }
+        })
+    };
+</script>
+</th:block>
+
+
+</body>
+</html>

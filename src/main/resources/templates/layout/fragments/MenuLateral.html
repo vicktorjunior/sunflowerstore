@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body>
+
+<aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
+    <div class="aw-layout-sidebar__content">
+
+        <nav class="aw-menu  js-menu">
+            <ul class="aw-menu__list">
+
+                <li class="aw-menu__item">
+                    <a th:href="@{/}"><i class="fa  fa-fw  fa-home" ></i><span th:text="#{home.dashboard}"></span></a>
+                </li>
+
+                <li class="aw-menu__item">
+                    <a href="#">
+                        <i class="fa  fa-fw fa-diamond"></i><span th:text="#{home.products}"></span>
+                        <i class="aw-menu__navigation-icon  fa"></i>
+                    </a>
+
+                    <ul class="aw-menu__list  aw-menu__list--sublist">
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/products/new}" th:text="#{home.products.new}"></a></li>
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/products/list}" th:text="#{home.products.list}"></a></li>
+                    </ul>
+                </li>
+
+                <li class="aw-menu__item">
+                    <a href="#">
+                        <i class="fa  fa-fw  fa-line-chart"></i><span th:text="#{home.reports}"></span>
+                        <i class="aw-menu__navigation-icon  fa"></i>
+                    </a>
+
+                    <ul class="aw-menu__list  aw-menu__list--sublist">
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.reports.products}" th:href="@{/}"></a></li>
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.reports.sellings}" th:href="@{/}"></a></li>
+                    </ul>
+                </li>
+
+
+                <li class="aw-menu__item">
+                    <a href="#">
+                        <i class="fa  fa-fw  fa-shopping-cart"></i><span th:text="#{home.sellings}"></span>
+                        <i class="aw-menu__navigation-icon  fa"></i>
+                    </a>
+
+                    <ul class="aw-menu__list  aw-menu__list--sublist">
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.sellings.new}" th:href="@{/}"></a></li>
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.sellings.manage}" th:href="@{/}"></a></li>
+                    </ul>
+                </li>
+
+                <li class="aw-menu__item">
+                    <a href="#">
+                        <i class="fa  fa-fw  fa-shopping-cart"></i><span th:text="#{home.suppliers}"></span>
+                        <i class="aw-menu__navigation-icon  fa"></i>
+                    </a>
+
+                    <ul class="aw-menu__list  aw-menu__list--sublist">
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.suppliers.new}" th:href="@{/supplier/new}"></a></li>
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.suppliers.manage}" th:href="@{/}"></a></li>
+                    </ul>
+                </li>
+
+                <li class="aw-menu__item">
+                    <a href="#">
+                        <i class="fa  fa-fw  fa-users"></i><span th:text="#{home.users}"></span>
+                        <i class="aw-menu__navigation-icon  fa"></i>
+                    </a>
+
+                    <ul class="aw-menu__list  aw-menu__list--sublist">
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.users.new}" th:href="@{/}"></a></li>
+                        <li class="aw-menu__item  aw-menu__item--link"><a th:text="#{home.users.all}" th:href="@{/}"></a></li>
+                    </ul>
+                </li>
+
+
+
+            </ul>
+        </nav>
+
+    </div>
+</aside>
+</body>
+</html>

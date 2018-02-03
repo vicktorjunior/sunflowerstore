@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+    <title th:text="#{home.products.new}"></title>
+</head>
+<body>
+<section layout:fragment="conteudo" >
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1 th:text="#{home.products.new}">
+
+            </h1>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid">
+
+        <th:block th:include="fragments/MensagemSucessoCadastro"></th:block>
+
+
+        <form method="POST" th:object="${product}" class="form-vertical  js-form-loading" th:action="@{/products/new}">
+
+            <th:block th:include="fragments/MensagensErroValidacao"></th:block>
+
+            <input type="hidden" id="id" th:field="*{codigo}">
+
+            <div class="row">
+                <div class="col-sm-2 form-group" th:classappend="${#fields.hasErrors('apelido')} ? has-error">
+                    <label for="apelido" class="control-label" th:text="#{product.nick}"></label>
+                    <input id="apelido" type="text" class="form-control" th:field="*{apelido}" required/>
+                </div>
+
+                <div class="col-sm-10 form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+                    <label for="nome" class="control-label" th:text="#{product.name}">Nome</label>
+                    <input id="nome" class="form-control" th:field="*{nome}" required>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+                <label for="descricao" class="control-label" th:text="#{product.description}"></label>
+                <textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}" required></textarea>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('dataCompra')} ? has-error">
+                    <label for="dataCompra" class="control-label" th:text="#{product.datebuy}"></label>
+                    <div class="input-group">
+                        <input type="date" th:field="*{dataCompra}" th:value="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}"required name="dataCompra" id="dataCompra" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('category')} ? has-error">
+                        <label for="category" class="control-label" th:text="#{category.name}"></label>
+                        <div class="pt-field-action">
+                            <select id="category" class="form-control" th:field="*{category}" required>
+                                <option value="" th:text="#{product.category.select}"></option>
+                                <option th:each="category: ${categorias}" th:value="${category}" th:text="${category.descricao}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('supplier')} ? has-error">
+                    <label for="supplier" class="control-label" th:text="#{product.list.supplier}"></label>
+                    <div class="pt-field-action">
+                        <select id="supplier" class="form-control" th:field="*{supplier}" required>
+                            <option value="" th:text="#{product.supplier.select}"></option>
+                            <option th:each="supplier:${fornecedores}" th:value="${supplier.codigo}" th:text="${supplier.nome}"></option>
+                        </select>
+
+                        <!--<div class="pt-field-action_icon">
+                            <a href="#" data-toggle="modal" data-target="#modalCadastroRapidoFornecedor">
+                                <i class="glyphicon glyphicon-plus-sign pt-icon-large"></i>
+                            </a>
+                        </div>-->
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-3 col-sm-6 form-group" th:classappend="${#fields.hasErrors('origin')} ? has-error">
+                    <label class="control-label" th:text="#{product.origin}"></label>
+                    <div>
+                        <th:block th:each="origin:${origens}">
+                        <div class="radio radio-inline">
+                            <input type="radio" th:id="|id_${origin}|" th:value="${origin}" th:field="*{origin}" required>
+                            <label th:for="|id_${origin}|" th:text="${origin.descricao}" ></label>
+                        </div>
+                        </th:block>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-3 form-group" th:classappend="${#fields.hasErrors('precoCompra')} ? has-error">
+                    <label for="pcompra" class="control-label" th:text="#{product.pricebuy}"></label>
+                    <div class="input-group">
+                        <div class="input-group-addon">R$</div>
+                        <input type="text" id="pcompra" class="form-control js-decimal" th:field="*{precoCompra}" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('percentual')} ? has-error">
+                    <label for="percen" class="control-label" th:text="#{product.percent}"></label>
+                    <div class="input-group">
+                        <input type="text" id="percen" class="form-control inteiro" tabindex="2" th:field="*{percentual}" readonly required>
+                        <div class="input-group-addon">%</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 form-group" th:classappend="${#fields.hasErrors('precoVenda')} ? has-error">
+                    <label for="pvenda" class="control-label" th:text="#{product.pricesell}"></label><!--ADICIONAR CÁLCULO PARA GERAR AUTOMATICAMENTE -->
+                    <div class="input-group">
+                        <div class="input-group-addon">R$</div>
+                        <input type="text" id="pvenda" class="form-control js-decimal" th:field="*{precoVenda}" required>
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('qtd')} ? has-error">
+                    <label for="qtd" class="control-label" th:text="#{product.qtd}"></label>
+                    <input type="number" min="1" max="100" id="qtd" value="1" class="form-control" th:field="*{qtd}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn  btn-primary" type="submit" th:text="#{save}"></button>
+            </div>
+
+        </form>
+    </div>
+
+    <div th:replace="layout/estilo/CadastroRapidoFornecedor :: modalFornecedor"></div>
+</section>
+
+
+</body>
+</html>
