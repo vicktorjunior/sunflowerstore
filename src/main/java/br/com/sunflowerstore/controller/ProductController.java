@@ -59,7 +59,7 @@ public class ProductController {
 	    	}
 			return novo(product);
 		}
-		productService.sendMessage(product);
+		//productService.sendMessage(product);
 		redirectAttributes.addFlashAttribute("mensagem", "Product Salvo com Sucesso"); // TODO: MSG003
 		return new ModelAndView("redirect:/products/new");
 	}

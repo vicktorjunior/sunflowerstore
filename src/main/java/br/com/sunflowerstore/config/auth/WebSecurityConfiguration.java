@@ -52,7 +52,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logout().logoutUrl("/logout").deleteCookies("remember-me")
 				.invalidateHttpSession(true)
 				.logoutSuccessUrl("/login?logout").permitAll().and().rememberMe();*/
-		//http.csrf().disable();
+		http.csrf().disable();
 
 	}
 
