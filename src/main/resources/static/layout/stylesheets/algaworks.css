@@ -325,6 +325,7 @@
 .aw-simple-panel {
   color: #777777;
   text-align: center;
+  padding: 10px;
 }
 .aw-simple-panel__message {
   padding: 20px 0px;
