@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
+
+
     public Optional<Supplier> findByNomeIgnoreCase(String nome);
 
 }
