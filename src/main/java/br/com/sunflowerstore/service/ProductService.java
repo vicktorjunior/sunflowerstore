@@ -29,6 +29,7 @@ public class ProductService {
 
     @Transactional
     public Product salvar(Product product) {
+		String nomeProduct = product.getNome();
     	/*product.setApelido(validaApelido(product.getApelido()));
     	product.setCategory(product.getCategory());
     	product.setDataCompra(product.getDataCompra());
@@ -37,7 +38,13 @@ public class ProductService {
     	product.setPrecoCompra(product.getPrecoCompra());
     	product.setPrecoVenda(product.getPrecoVenda());
     	product.setPercentual(product.getPercentual());*/
-        return productRepository.save(product);
+    	if (productRepository.findByNomeIgnoreCase(nomeProduct).isEmpty()) {
+			return productRepository.save(product);
+		} else {
+			System.out.println("erro ao salvar produto");
+			return null;
+		}
+
     }
 
 
