@@ -3,6 +3,7 @@ package br.com.sunflowerstore.service;
 import br.com.sunflowerstore.model.Product;
 import br.com.sunflowerstore.repository.ProductRepository;
 import br.com.sunflowerstore.service.exception.GenericException;
+import br.com.sunflowerstore.service.exception.ProdutoJaCadastradoException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,7 @@ public class ProductService {
     	if (productRepository.findByNomeIgnoreCase(nomeProduct).isEmpty()) {
 			return productRepository.save(product);
 		} else {
-			System.out.println("erro ao salvar produto");
-			return null;
+			throw new ProdutoJaCadastradoException("Product já existe no sistema!");
 		}
 
     }

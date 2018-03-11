@@ -6,7 +6,7 @@ import br.com.sunflowerstore.model.Product;
 import br.com.sunflowerstore.repository.ProductRepository;
 import br.com.sunflowerstore.repository.SupplierRepository;
 import br.com.sunflowerstore.service.ProductService;
-import br.com.sunflowerstore.service.exception.GenericException;
+import br.com.sunflowerstore.service.exception.ProdutoJaCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,12 +51,8 @@ public class ProductController {
 		}
 		try {
 			productService.salvar(product);
-		} catch(GenericException e) {
-			if (e.getField() != null) {
-	    		result.rejectValue(e.getField(), e.getMessage(), e.getMessage());
-	    	} else {
-	    		redirectAttributes.addFlashAttribute("mensagem", e.getMessage()); // TODO: RNG010 MSG003
-	    	}
+		} catch(ProdutoJaCadastradoException e) {
+			result.rejectValue("nome", e.getMessage(), e.getMessage());
 			return novo(product);
 		}
 		//productService.sendMessage(product);

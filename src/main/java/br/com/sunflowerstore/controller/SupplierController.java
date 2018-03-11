@@ -1,7 +1,6 @@
 package br.com.sunflowerstore.controller;
 
 import br.com.sunflowerstore.model.Supplier;
-import br.com.sunflowerstore.repository.SupplierRepository;
 import br.com.sunflowerstore.service.SupplierService;
 import br.com.sunflowerstore.service.exception.NomeFornecedorJaCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,6 @@ import javax.validation.Valid;
 public class SupplierController {
 
 	@Autowired
-	private SupplierRepository supplierRepository;
-
-	@Autowired
 	private SupplierService supplierService;
 
 	@RequestMapping("new")
@@ -43,12 +39,7 @@ public class SupplierController {
 			return novo(supplier);
 		}
 		try {
-			if(!supplierRepository.findByNomeIgnoreCase(supplier.getNome()).isPresent()){
-				supplierService.salvar(supplier);
-			} else {
-				System.out.println("fornecedor já existe");
-			}
-
+			supplierService.salvar(supplier);
 		} catch (NomeFornecedorJaCadastradoException e) {
 			result.rejectValue("nome", e.getMessage(), e.getMessage());
 			return novo(supplier);
