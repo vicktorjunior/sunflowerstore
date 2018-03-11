@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Locale;
 
 @Controller
-@RequestMapping("/user/")
+@RequestMapping("/users/")
 public class UserController {
 	
 	private final Messages messages;
@@ -28,6 +28,13 @@ public class UserController {
 		this.messages = messages;
 		this.userService=userService;
 	}
+
+    @RequestMapping("new")
+    public ModelAndView novo(User user) {
+        ModelAndView mv = new ModelAndView("users/new");
+
+        return mv;
+    }
 
 	@GetMapping("profile")
     public ModelAndView viewProfile(@AuthenticationPrincipal UserImpl activeUser){
