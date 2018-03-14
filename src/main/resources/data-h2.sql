@@ -13,5 +13,23 @@ insert into role(id, role) values
 
 -- USER_ROLES
 insert into user_roles (user_id, roles_id) values
-(1, 1),
+(1, 1);
+
+-- SUPPLIER
+insert into fornecedores (nome) values
+  ('teste fornecedor');
+
+-- PRODUCT
+insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+  ('Arma','Arma','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+
+insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+('Bola','Bola','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+
+insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+('Carrinho','Carrinho','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+
+insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+('Dado','Dado','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+
 
