@@ -12,8 +12,11 @@ public class SellController {
 
     private ProductRepository productRepository;
 
+    public SellController(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
-    @RequestMapping("new")
+	@RequestMapping("new")
     public ModelAndView novo(Sell sell) {
         ModelAndView mv = new ModelAndView("sell/new");
         mv.addObject("produtos", productRepository.findAll());
