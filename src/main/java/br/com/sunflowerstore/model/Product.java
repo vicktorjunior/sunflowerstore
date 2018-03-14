@@ -47,6 +47,12 @@ public class Product {
 	@NotNull(message = "Supplier é obrigatório")
 	private Supplier supplier; // TODO: RNG 003
 
+	@ManyToOne
+	@JoinColumn(name = "sell_product")
+	//@NotNull(message = "Supplier é obrigatório")
+	private Sell sell; // TODO: RNG 003
+
+
 	@NotNull(message = "Origin é obrigatório")
 	@Enumerated
 	private Origin origin; // TODO: RNG 003
@@ -181,6 +187,14 @@ public class Product {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+
+	public Sell getSell() {
+		return sell;
+	}
+
+	public void setSell(Sell sell) {
+		this.sell = sell;
 	}
 
 	@Override
