@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by rodrigo on 3/18/17.
  */
 @Entity
-@Table(name = "roles")
+//@Table(name = "roles") // todo: descomentar para usar postgresql
 public class Role {
 
 	@Id

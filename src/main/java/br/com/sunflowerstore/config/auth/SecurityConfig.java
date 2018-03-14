@@ -1,6 +1,5 @@
 package br.com.sunflowerstore.config.auth;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
@@ -25,10 +24,10 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
         auth.userDetailsService(this.userDetailsService);
 	}
 
-	@Autowired
+	/*@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 		auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-	}
+	}*/
 
 }
