@@ -28,8 +28,8 @@
 
             <div class="row">
                 <div class="col-sm-2 form-group" th:classappend="${#fields.hasErrors('qtdProd')} ? has-error">
-                    <label for="qtd" class="control-label" th:text="#{selling.qtd}"></label>
-                    <input type="number" min="1" max="100" id="qtd" value="1" class="form-control" th:field="*{qtdProd}" required>
+                    <label for="qtdSelling" class="control-label" th:text="#{selling.qtd}"></label>
+                    <input type="number" min="1" max="100" id="qtdSelling" value="1" class="form-control" th:field="*{qtdProd}" required>
                 </div>
 
                 <div class="col-sm-8 form-group">
@@ -54,6 +54,12 @@
                     <input type="text" id="sellingPrice" class="form-control" th:field="*{products}" th:text="${products == null ? '' : products.precoVenda}" disabled >
                 </div>
 
+            </div>
+            <div class="row">
+                <div class="col-sm-2 form-group">
+                    <label for="product" class="control-label" th:text="#{selling.total}"></label>
+                    <input type="text" id="sellingTotal" class="form-control" th:field="*{products}" th:text="${products == null ? '' : products.precoVenda}" disabled >
+                </div>
             </div>
 
 

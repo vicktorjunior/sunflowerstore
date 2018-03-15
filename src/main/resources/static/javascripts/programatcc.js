@@ -29,6 +29,13 @@
     $('#products').change(function () {
        $('#sellingPrice').val($('#products').val()).toString();
     });
+    
+    // updating total selling price according to product value and quantity
+    $('#qtdSelling').change(function () {
+        var qtdSelling = parseInt($('#qtdSelling').val());
+        var sellingPrice = parseFloat($('#sellingPrice').val());
+        $('#sellingTotal').val(qtdSelling*sellingPrice);
+    });
 
 
 
