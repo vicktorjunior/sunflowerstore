@@ -37,12 +37,12 @@
                     <div class="pt-field-action">
                         <select id="products" class="form-control" th:field="*{products}" required>
                             <option value="" th:text="#{product.supplier.select}"></option>
-                            <option th:each="products:${produtos}" th:value="${products.codigo}" th:text="${products.nome}"></option>
+                            <option th:each="products:${produtos}" th:value="${products.precoVenda}" th:text="${products.nome}"></option>
                         </select>
 
                         <!--<div class="pt-field-action_icon">
                             <a href="#" data-toggle="modal" data-target="#modalCadastroRapidoFornecedor">
-                                <i class="glyphicon glyphicon-plus-sign pt-icon-large"></i>
+                                <i class="glyphicon glyphicon-plus-sign pt-icon-large"></i>s
                             </a>
                         </div>-->
                     </div>

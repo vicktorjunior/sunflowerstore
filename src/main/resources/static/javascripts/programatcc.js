@@ -27,8 +27,7 @@
 
     // updating selling price text field through JS
     $('#products').change(function () {
-       var sellingPrice = $('#products')
-
+       $('#sellingPrice').val($('#products').val()).toString();
     });
 
 
