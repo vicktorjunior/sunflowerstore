@@ -3,9 +3,8 @@ package br.com.sunflowerstore.controller;
 import br.com.sunflowerstore.enums.Category;
 import br.com.sunflowerstore.enums.Origin;
 import br.com.sunflowerstore.model.Product;
-import br.com.sunflowerstore.repository.ProductRepository;
-import br.com.sunflowerstore.repository.SupplierRepository;
 import br.com.sunflowerstore.service.ProductService;
+import br.com.sunflowerstore.service.SupplierService;
 import br.com.sunflowerstore.service.exception.ProdutoJaCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,19 +24,16 @@ import javax.validation.Valid;
 public class ProductController {
 
 	@Autowired
-	private SupplierRepository supplierRepository;
+	private SupplierService supplierService;
 
 	@Autowired
 	private ProductService productService;
-
-	@Autowired
-	private ProductRepository productRepository;
 
 	@RequestMapping("new")
 	public ModelAndView novo(Product product) {
 		ModelAndView mv = new ModelAndView("product/new");
 		mv.addObject("categorias", Category.values());
-		mv.addObject("fornecedores", supplierRepository.findAll());
+		mv.addObject("fornecedores", supplierService.listAll());
 		mv.addObject("origens", Origin.values());
 		return mv;
 	}
@@ -83,7 +79,7 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView("product/new");
 		model.addAttribute("product", productService.get(id));
 		mv.addObject("categorias", Category.values());
-		mv.addObject("fornecedores", supplierRepository.findAll());
+		mv.addObject("fornecedores", supplierService.listAll());
 		mv.addObject("origens", Origin.values());
 		model.addAttribute("action", "record");
 		return mv;
@@ -91,7 +87,7 @@ public class ProductController {
 
 	@GetMapping("delete/{id}")
 	public String delete(Model model, @PathVariable Long id) {
-		productRepository.delete(id);
+		productService.delete(id);
 		return "redirect:/products/list";
 	}
 

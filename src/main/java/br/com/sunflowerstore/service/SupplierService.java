@@ -1,14 +1,14 @@
 package br.com.sunflowerstore.service;
 
-import java.util.Optional;
-
 import br.com.sunflowerstore.model.Supplier;
+import br.com.sunflowerstore.repository.SupplierRepository;
+import br.com.sunflowerstore.service.exception.NomeFornecedorJaCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.sunflowerstore.repository.SupplierRepository;
-import br.com.sunflowerstore.service.exception.NomeFornecedorJaCadastradoException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by VictorJr on 25/04/2017.
@@ -26,6 +26,10 @@ public class SupplierService {
             throw new NomeFornecedorJaCadastradoException("Nome do Supplier já existe no sistema!");
         }
         return fornecedores.saveAndFlush(supplier);
+    }
+
+    public List<Supplier> listAll() {
+        return fornecedores.findAll();
     }
 
 }

@@ -85,4 +85,8 @@ public class ProductService {
 			}
 		}
 	}
+
+	public void delete(Long id){
+		productRepository.delete(id);
+	}
 }

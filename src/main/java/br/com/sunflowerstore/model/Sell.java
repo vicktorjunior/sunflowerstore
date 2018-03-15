@@ -34,7 +34,13 @@ public class Sell {
         this.qtdProd = qtdProd;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public LocalDateTime getTimeSell() {
         return timeSell;
