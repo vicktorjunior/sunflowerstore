@@ -56,10 +56,29 @@
 
                 <div class="col-sm-2 form-group">
                     <label for="addrow" class="control-label" th:text="#{selling.new.product}"></label>
-                    <input type="button" class="form-control btn btn-success" id="addrow" value="Add Row" />
+                    <input type="button" class="form-control btn btn-success" id="addrow" value="Add Product" />
                 </div>
 
 
+            </div>
+
+
+            <div class="row">
+                <input type="hidden" id="ccnt" value="0">
+                <table class="table" id="productsToSell">
+                    <thead>
+                    <tr>
+                        <th scope="col">Qtd</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Unit Value</th>]
+                        <th scope="col">Total</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
             </div>
 
             <div class="row">
