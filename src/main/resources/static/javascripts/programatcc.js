@@ -45,7 +45,7 @@ var totals=0;
         var discount = parseFloat($('#desconto').val());
         var sellingTotal = (qtdSelling*sellingPrice)-((discount/100)-sellingPrice);
 
-        console.log(discount/100);
+        console.log((discount/100)*sellingPrice);
         console.log(sellingTotal);
 
 
