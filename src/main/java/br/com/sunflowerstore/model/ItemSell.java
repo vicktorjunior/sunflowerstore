@@ -1,7 +1,7 @@
 package br.com.sunflowerstore.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 public class ItemSell {
@@ -12,13 +12,17 @@ public class ItemSell {
 
     private Integer qtd;
 
+    private BigDecimal unitValue;
+
+    private BigDecimal discount;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private List<Product> product;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "sell_id")
-    private List<Sell> sell;
+    private Sell sell;
 
     public Long getId() {
         return id;
@@ -36,19 +40,35 @@ public class ItemSell {
         this.qtd = qtd;
     }
 
-    public List<Product> getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(List<Product> product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public List<Sell> getSell() {
+    public Sell getSell() {
         return sell;
     }
 
-    public void setSell(List<Sell> sell) {
+    public void setSell(Sell sell) {
         this.sell = sell;
+    }
+
+    public BigDecimal getUnitValue() {
+        return unitValue;
+    }
+
+    public void setUnitValue(BigDecimal unitValue) {
+        this.unitValue = unitValue;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
     }
 }

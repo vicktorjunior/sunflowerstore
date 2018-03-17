@@ -20,24 +20,24 @@
 
     <div class="container-fluid">
 
-        <form method="POST" th:object="${sell}" class="form-vertical  js-form-loading" th:action="@{/sell/new}">
+        <form method="POST" th:object="${itemSell}" class="form-vertical js-form-loading" th:action="@{/sell/add}">
 
             <th:block th:include="fragments/MensagensErroValidacao"></th:block>
 
-            <input type="hidden" id="id" th:field="*{codigo}">
+            <input type="hidden" id="id" th:field="*{id}">
 
             <div class="row">
-                <div class="col-sm-1 form-group" th:classappend="${#fields.hasErrors('qtdProd')} ? has-error">
+                <div class="col-sm-1 form-group">
                     <label for="qtdSelling" class="control-label" th:text="#{selling.qtd}"></label>
-                    <input type="number" min="1" max="100" id="qtdSelling" value="1" class="form-control" th:field="*{qtdProd}" required>
+                    <input type="number" min="1" max="100" id="qtdSelling" value="1" class="form-control" th:field="*{qtd}">
                 </div>
 
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.nome}"></label>
                     <div class="pt-field-action">
-                        <select id="products" class="form-control" th:field="*{products}" required>
+                        <select id="products" class="form-control" th:field="*{product}" >
                             <option value="" th:text="#{product.list}"></option>
-                            <option th:each="products:${produtos}" th:value="${products.precoVenda}" th:text="${products.nome}"></option>
+                            <option th:each="product:${produtos}" th:value="${product.precoVenda}" th:text="${product.nome}"></option>
                         </select>
                     </div>
 
@@ -45,30 +45,30 @@
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.precoVenda}"></label>
-                    <input type="text" id="sellingPrice" class="form-control" th:field="*{products}" th:text="${products == null ? '' : products.precoVenda}" disabled >
+                    <input type="text" id="sellingPrice" class="form-control" th:field="*{unitValue}" th:text="${product == null ? '' : product.precoVenda}" disabled >
                 </div>
 
 
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.desconto}"></label>
                     <div class="input-group">
-                        <input type="number" id="desconto" class="form-control" th:field="*{products}" value="0" min="0" required >
+                        <input type="number" id="desconto" class="form-control" th:field="*{discount}" value="0" min="0">
                         <span class="input-group-addon" id="basic-addon2">%</span>
                     </div>
                 </div>
 
                 <div class="col-sm-2 form-group">
                     <label for="totProd" class="control-label" th:text="#{selling.total}"></label>
-                    <input type="text" id="totProd" class="form-control" th:field="*{products}" th:text="${products == null ? '' : products.precoVenda}" disabled >
+                    <input type="text" id="totProd" class="form-control" th:field="*{sell.totalSell}" disabled >
                 </div>
 
-                <div class="col-sm-2 form-group">
+                <div id="hidden" class="col-sm-2 form-group">
                     <label for="addrow" class="control-label" th:text="#{selling.new.product}"></label>
-                    <input type="button" class="form-control btn btn-success" id="addrow" value="Add Product" />
+                    <button type="submit" class="btn btn-success" id="addrow">Add Product</button>
                 </div>
-
-
             </div>
+
+        </form>
 
 
             <div class="row">
@@ -92,7 +92,7 @@
             <div class="row">
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{selling.total}"></label>
-                    <input type="text" id="sellingTotal" class="form-control" th:field="*{products}"disabled >
+                    <input type="text" id="sellingTotal" class="form-control"disabled > <!--th:field="*{sell.totalSell}"-->
                 </div>
 
             </div>
@@ -107,11 +107,11 @@
 
 
 
-            <div class="form-group">
+            <!--<div class="form-group">
                 <button class="btn  btn-primary" type="submit" th:text="#{save}"></button>
-            </div>
+            </div>-->
 
-        </form>
+
     </div>
 
 
