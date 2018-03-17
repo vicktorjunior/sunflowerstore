@@ -40,6 +40,7 @@
 
     $(document).ready(function () {
         $('#desconto').val(0);
+        $('#sellingTotal').val(0);
     });
 
 
@@ -65,9 +66,10 @@
         $('#productsToSell').find('> tbody').append(chtml);
 
 
-        /*$(".delete").click(function() {
+        $("#delete").click(function() {
             $(this).parents("tr").remove();
-        });*/
+            $('#sellingTotal').val(0);
+        });
 
         $('#qtdSelling').val(1);
         $('#products').prop('selectedIndex',0);

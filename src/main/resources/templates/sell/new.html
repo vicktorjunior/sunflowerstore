@@ -33,10 +33,10 @@
                 </div>
 
                 <div class="col-sm-2 form-group">
-                    <label for="product" class="control-label" th:text="#{product.list''}"></label>
+                    <label for="product" class="control-label" th:text="#{product.list.nome}"></label>
                     <div class="pt-field-action">
                         <select id="products" class="form-control" th:field="*{products}" required>
-                            <option value="" th:text="#{product.supplier.select}"></option>
+                            <option value="" th:text="#{product.list}"></option>
                             <option th:each="products:${produtos}" th:value="${products.precoVenda}" th:text="${products.nome}"></option>
                         </select>
                     </div>
