@@ -13,8 +13,12 @@ public class Sell {
 
     private int qtdProd;
 
+    // existe para funcionar a view de new sell (precisa ser removido e a view adaptada)
     @OneToMany(mappedBy = "sell")
     private List<Product> products;
+
+    @OneToMany(mappedBy = "sell")
+    private List<ItemSell> itemSell;
 
     private LocalDateTime timeSell;
 
@@ -48,5 +52,13 @@ public class Sell {
 
     public void setTimeSell(LocalDateTime timeSell) {
         this.timeSell = timeSell;
+    }
+
+    public List<ItemSell> getItemSell() {
+        return itemSell;
+    }
+
+    public void setItemSell(List<ItemSell> itemSell) {
+        this.itemSell = itemSell;
     }
 }

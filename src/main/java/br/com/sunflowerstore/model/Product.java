@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by VictorJr on 23/03/2017.
@@ -51,6 +52,9 @@ public class Product {
 	@JoinColumn(name = "sell_product")
 	//@NotNull(message = "Supplier é obrigatório")
 	private Sell sell; // TODO: RNG 003
+
+	@OneToMany(mappedBy = "product")
+	private List<ItemSell> itemSell;
 
 
 	@NotNull(message = "Origin é obrigatório")
@@ -195,6 +199,14 @@ public class Product {
 
 	public void setSell(Sell sell) {
 		this.sell = sell;
+	}
+
+	public List<ItemSell> getItemSell() {
+		return itemSell;
+	}
+
+	public void setItemSell(List<ItemSell> itemSell) {
+		this.itemSell = itemSell;
 	}
 
 	@Override
