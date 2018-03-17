@@ -32,19 +32,13 @@
                     <input type="number" min="1" max="100" id="qtdSelling" value="1" class="form-control" th:field="*{qtdProd}" required>
                 </div>
 
-                <div class="col-sm-4 form-group">
+                <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.nome}"></label>
                     <div class="pt-field-action">
                         <select id="products" class="form-control" th:field="*{products}" required>
                             <option value="" th:text="#{product.supplier.select}"></option>
                             <option th:each="products:${produtos}" th:value="${products.precoVenda}" th:text="${products.nome}"></option>
                         </select>
-
-                        <!--<div class="pt-field-action_icon">
-                            <a href="#" data-toggle="modal" data-target="#modalCadastroRapidoFornecedor">
-                                <i class="glyphicon glyphicon-plus-sign pt-icon-large"></i>s
-                            </a>
-                        </div>-->
                     </div>
 
 
@@ -64,6 +58,11 @@
                 </div>
 
                 <div class="col-sm-2 form-group">
+                    <label for="totProd" class="control-label" th:text="#{selling.total}"></label>
+                    <input type="text" id="totProd" class="form-control" th:field="*{products}" th:text="${products == null ? '' : products.precoVenda}" disabled >
+                </div>
+
+                <div class="col-sm-2 form-group">
                     <label for="addrow" class="control-label" th:text="#{selling.new.product}"></label>
                     <input type="button" class="form-control btn btn-success" id="addrow" value="Add Product" />
                 </div>
@@ -73,7 +72,6 @@
 
 
             <div class="row">
-                <input type="hidden" id="ccnt" value="0">
                 <table class="table" id="productsToSell">
                     <thead>
                     <tr>

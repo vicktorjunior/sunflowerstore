@@ -47,20 +47,18 @@
         var qtdSelling = parseInt($('#qtdSelling').val());
         var sellingPrice = parseFloat($('#sellingPrice').val());
         var productName = $('#products :selected').text();
-        var discount = parseFloat($('#desconto').val());
-        var sellingTotal = (qtdSelling*sellingPrice)-((discount/100)-sellingPrice);
-        console.log(discount);
-
-        console.log((discount/100)*sellingPrice);
-        console.log(sellingTotal);
+        var discount = ((parseFloat($('#desconto').val())*sellingPrice)/100)*qtdSelling;
+        var sellingTotal = (qtdSelling*sellingPrice)-discount;
+        //console.log(discount);
+        //console.log(sellingTotal);
 
 
         var chtml = "<tr>\n" +
             "                        <td> " + qtdSelling + "</td>\n" +
             "                        <td> " + productName + "</td>\n" +
             "                        <td>" + sellingPrice +" </td>\n" +
-            "                        <td>" + discount +" </td>\n" +
-            "                        <td class=\"sellingTotal\">" + sellingTotal +" </td>\n" +
+            "                        <td>" + discount.toFixed(2) +" </td>\n" +
+            "                        <td class=\"sellingTotal\">" + sellingTotal.toFixed(2) +" </td>\n" +
             "                        <td><div class=\"col-sm-4\"><input type=\"button\" id=\"delete\" class=\"form-control btn btn-danger\" value=\"Delete\"/></div></td>\n" +
             "                    </tr>";
 
@@ -72,13 +70,22 @@
         });*/
 
         $('#qtdSelling').val(1);
-        $('#products').val(0);
+        $('#products').prop('selectedIndex',0);
         $('#desconto').val(0);
         $('#sellingPrice').val(0);
+        $('#totProd').val(0)
+        
+    });
+    
+    
+    $("#desconto, #qtdSelling, #products").change(function () {
+        var qtdSelling = parseInt($('#qtdSelling').val());
+        var sellingPrice = parseFloat($('#sellingPrice').val());
+        var productName = $('#products :selected').text();
+        var discount = ((parseFloat($('#desconto').val())*sellingPrice)/100)*qtdSelling;
+        var sellingTotal = (qtdSelling*sellingPrice)-discount;
 
-
-
-
+        $("#totProd").val(sellingTotal.toFixed(2));
     });
 
 
@@ -95,60 +102,6 @@
 
         parseFloat($('#sellingTotal').val(totals));
     });
-
-
-
-
-
-
-    $('#ccnt').data('count', 0);
-    /*$('#addrow').click(function () {
-
-        function getcount() {
-            var $this = $('#ccnt'),
-                count = $this.data('count') + 1;
-
-            $this.data('count', count);
-            return count;
-        }
-
-        var mycount = getcount();
-        //console.log('mycount: ' + mycount);
-
-        var tdclass;
-        if (mycount % 2 == 1) {
-            tdclass = "td1";
-        } else {
-            tdclass = "td2";
-        }
-        //console.log('tdclass: ' + tdclass);
-        //window.alert(mycount + ' ' + tdclass);
-
-        var chtml = "<tr>\n" +
-            "                        <th scope=\"row\">1</th>\n" +
-            "                        <td></td>\n" +
-            "                        <td></td>\n" +
-            "                        <td>1.20</td>\n" +
-            "                        <td><div class=\"col-sm-4\"><input type=\"button\" id=\"delete\" class=\"form-control btn btn-danger\" value=\"Delete\"/></div></td>\n" +
-            "                    </tr>";
-
-
-        //console.log('chtml is: ' + chtml);
-        //window.alert(chtml);
-        //console.log("Writing an iteration of chtml to scrren...");
-        $('#productsToSell').find('> tbody').append(chtml);
-
-        $(".delete").click(function() {
-            $(this).parents("tr").remove();
-        });
-    });*/
-
-
-
-
-
-
-
 
 
 
