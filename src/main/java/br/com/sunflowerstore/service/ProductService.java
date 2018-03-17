@@ -64,6 +64,10 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
+	public List<Product> listInStock() {
+		return productRepository.findByQtdGreaterThan(0);
+	}
+
 	public Product get(Long id) {
 		return productRepository.getOne(id);
 	}

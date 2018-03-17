@@ -27,7 +27,7 @@ insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fo
 ('Bola','Bola','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,25.00,1,11);
 
 insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
-('Amoeba','Amoeba','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,10.00,1,11);
+('Amoeba','Amoeba','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,10.00,1,0);
 
 insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
 ('Guarda-chuva','Guarda-chuva','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,24.99,1,11);

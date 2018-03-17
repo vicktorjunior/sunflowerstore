@@ -19,7 +19,7 @@ public class SellController {
 	@RequestMapping("new")
     public ModelAndView novo(Sell sell) {
         ModelAndView mv = new ModelAndView("sell/new");
-        mv.addObject("produtos", productService.listAll());
+        mv.addObject("produtos", productService.listInStock());
         return mv;
     }
 
