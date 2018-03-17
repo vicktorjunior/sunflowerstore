@@ -56,7 +56,7 @@
         var chtml = "<tr>\n" +
             "                        <td> " + qtdSelling + "</td>\n" +
             "                        <td> " + productName + "</td>\n" +
-            "                        <td>" + sellingPrice +" </td>\n" +
+            "                        <td>" + sellingPrice.toFixed(2) +" </td>\n" +
             "                        <td>" + discount.toFixed(2) +" </td>\n" +
             "                        <td class=\"sellingTotal\">" + sellingTotal.toFixed(2) +" </td>\n" +
             "                        <td><div class=\"col-sm-4\"><input type=\"button\" id=\"delete\" class=\"form-control btn btn-danger\" value=\"Delete\"/></div></td>\n" +
