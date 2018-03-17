@@ -47,20 +47,18 @@
         var qtdSelling = parseInt($('#qtdSelling').val());
         var sellingPrice = parseFloat($('#sellingPrice').val());
         var productName = $('#products :selected').text();
-        var discount = parseFloat($('#desconto').val());
-        var sellingTotal = (qtdSelling*sellingPrice)-((discount/100)-sellingPrice);
-        console.log(discount);
-
-        console.log((discount/100)*sellingPrice);
-        console.log(sellingTotal);
+        var discount = ((parseFloat($('#desconto').val())*sellingPrice)/100)*qtdSelling;
+        var sellingTotal = (qtdSelling*sellingPrice)-discount;
+        //console.log(discount);
+        //console.log(sellingTotal);
 
 
         var chtml = "<tr>\n" +
             "                        <td> " + qtdSelling + "</td>\n" +
             "                        <td> " + productName + "</td>\n" +
             "                        <td>" + sellingPrice +" </td>\n" +
-            "                        <td>" + discount +" </td>\n" +
-            "                        <td class=\"sellingTotal\">" + sellingTotal +" </td>\n" +
+            "                        <td>" + discount.toFixed(2) +" </td>\n" +
+            "                        <td class=\"sellingTotal\">" + sellingTotal.toFixed(2) +" </td>\n" +
             "                        <td><div class=\"col-sm-4\"><input type=\"button\" id=\"delete\" class=\"form-control btn btn-danger\" value=\"Delete\"/></div></td>\n" +
             "                    </tr>";
 

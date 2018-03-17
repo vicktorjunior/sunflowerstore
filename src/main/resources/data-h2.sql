@@ -21,15 +21,15 @@ insert into fornecedores (nome) values
 
 -- PRODUCT
 insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
-  ('Arma','Arma','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+  ('Piercing','Piercing','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,5.00,1,11);
 
 insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
-('Bola','Bola','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+('Bola','Bola','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,25.00,1,11);
 
 insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
-('Carrinho','Carrinho','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+('Amoeba','Amoeba','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,10.00,1,11);
 
 insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
-('Dado','Dado','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,1.11,1,11);
+('Guarda-chuva','Guarda-chuva','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,24.99,1,11);
 
 
