@@ -58,7 +58,7 @@
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.desconto}"></label>
                     <div class="input-group">
-                        <input type="number" id="desconto" class="form-control" th:field="*{products}">
+                        <input type="number" id="desconto" class="form-control" th:field="*{products}" value="0" min="0" required >
                         <span class="input-group-addon" id="basic-addon2">%</span>
                     </div>
                 </div>
@@ -96,6 +96,15 @@
                     <label for="product" class="control-label" th:text="#{selling.total}"></label>
                     <input type="text" id="sellingTotal" class="form-control" th:field="*{products}"disabled >
                 </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-2 form-group">
+                    <input type="button" class="form-control btn btn-success" id="sumTotal" th:value="#{sum}" />
+                </div>
+
             </div>
 
 

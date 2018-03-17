@@ -37,13 +37,19 @@
         $('#sellingTotal').val(qtdSelling*sellingPrice);
     });
 */
-var totals=0;
+
+    $(document).ready(function () {
+        $('#desconto').val(0);
+    });
+
+
     $('#addrow').click(function () {
         var qtdSelling = parseInt($('#qtdSelling').val());
         var sellingPrice = parseFloat($('#sellingPrice').val());
         var productName = $('#products :selected').text();
         var discount = parseFloat($('#desconto').val());
         var sellingTotal = (qtdSelling*sellingPrice)-((discount/100)-sellingPrice);
+        console.log(discount);
 
         console.log((discount/100)*sellingPrice);
         console.log(sellingTotal);
@@ -61,23 +67,36 @@ var totals=0;
         $('#productsToSell').find('> tbody').append(chtml);
 
 
+        /*$(".delete").click(function() {
+            $(this).parents("tr").remove();
+        });*/
+
+        $('#qtdSelling').val(1);
+        $('#products').val(0);
+        $('#desconto').val(0);
+        $('#sellingPrice').val(0);
+
+
+
+
+    });
+
+
+    $("#sumTotal").click(function () {
+        var totals=0;
+
         var $dataRows=$("#productsToSell").find("tr:has('.sellingTotal')");
 
         $dataRows.each(function() {
             $(this).find('.sellingTotal').each(function(){
-                totals+=parseFloat( $(this).html());
+                totals+=parseFloat($(this).html());
             });
         });
-        /*$("#sum_table td.totalCol").each(function(i){
-            $(this).html("total:"+totals[i]);
-        });*/
 
         parseFloat($('#sellingTotal').val(totals));
-
-        $(".delete").click(function() {
-            $(this).parents("tr").remove();
-        });
     });
+
+
 
 
 
