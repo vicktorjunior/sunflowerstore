@@ -1,7 +1,6 @@
 package br.com.sunflowerstore.model;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +8,16 @@ import java.util.List;
 @Entity
 public class Sell {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // usa o autoincremento no código
     private long codigo; // TODO: RNG 003
 
-    // existe para funcionar a view de new sell (precisa ser removido e a view adaptada)
     @OneToMany(mappedBy = "sell")
-    private List<Product> products;
+    private List<ItemSell> items = new ArrayList<ItemSell>();
 
-    @OneToMany(mappedBy = "sell")
-    private List<ItemSell> itemSell = new ArrayList<>();
-
-    private LocalDateTime timeSell;
-
-    private BigDecimal totalSell;
+    private LocalDateTime time;
 
     public long getCodigo() {
         return codigo;
@@ -32,39 +27,23 @@ public class Sell {
         this.codigo = codigo;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public LocalDateTime getTime() {
+        return time;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
-    public LocalDateTime getTimeSell() {
-        return timeSell;
+    public List<ItemSell> getItems() {
+        return items;
     }
 
-    public void setTimeSell(LocalDateTime timeSell) {
-        this.timeSell = timeSell;
-    }
-
-    public List<ItemSell> getItemSell() {
-        return itemSell;
-    }
-
-    public void setItemSell(List<ItemSell> itemSell) {
-        this.itemSell = itemSell;
-    }
-
-    public BigDecimal getTotalSell() {
-        return totalSell;
-    }
-
-    public void setTotalSell(BigDecimal totalSell) {
-        this.totalSell = totalSell;
+    public void setItems(List<ItemSell> items) {
+        this.items = items;
     }
 
     public void addProduct(ItemSell item) {
-        itemSell.add(item);
+        items.add(item);
     }
 }

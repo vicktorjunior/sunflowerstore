@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Created by VictorJr on 23/03/2017.
@@ -48,15 +47,6 @@ public class Product {
 	@NotNull(message = "Supplier é obrigatório")
 	private Supplier supplier; // TODO: RNG 003
 
-	@ManyToOne
-	@JoinColumn(name = "sell_product")
-	//@NotNull(message = "Supplier é obrigatório")
-	private Sell sell; // TODO: RNG 003
-
-	@OneToMany(mappedBy = "product")
-	private List<ItemSell> itemSell;
-
-
 	@NotNull(message = "Origin é obrigatório")
 	@Enumerated
 	private Origin origin; // TODO: RNG 003
@@ -76,10 +66,6 @@ public class Product {
 	@NotNull(message = "Quantidade em Estoque é obrigatório")
 	private Integer qtd; // TODO: RNG 003
 
-	private byte[] foto;
-
-	@Column(name = "content_type")
-	private String contentType;
 
 	public long getCodigo() {
 		return codigo;
@@ -122,7 +108,7 @@ public class Product {
 	}
 
 	public BigDecimal getPercentual() {
-		return percentual;
+		return ((precoVenda.subtract(precoCompra)).divide(precoCompra).multiply(new BigDecimal(100)));
 	}
 
 	public void setPercentual(BigDecimal percentual) {
@@ -175,38 +161,6 @@ public class Product {
 
 	public void setOrigin(Origin origin) {
 		this.origin = origin;
-	}
-
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-	public byte[] getFoto() {
-		return foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-
-	public Sell getSell() {
-		return sell;
-	}
-
-	public void setSell(Sell sell) {
-		this.sell = sell;
-	}
-
-	public List<ItemSell> getItemSell() {
-		return itemSell;
-	}
-
-	public void setItemSell(List<ItemSell> itemSell) {
-		this.itemSell = itemSell;
 	}
 
 	@Override

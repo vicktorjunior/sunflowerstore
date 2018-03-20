@@ -20,16 +20,54 @@
 
     <div class="container-fluid">
 
-        <form method="POST" th:object="${itemSell}" class="form-vertical js-form-loading" th:action="@{/sell/add}">
+        <!--
+        https://stackoverflow.com/questions/36500731/how-to-bind-an-object-list-with-thymeleaf
+        https://stackoverflow.com/questions/38637513/input-in-array-thymeleaf
+        -->
 
-            <th:block th:include="fragments/MensagensErroValidacao"></th:block>
+        <form method="POST" th:object="${items}" class="form-vertical js-form-loading" th:action="@{/sell/add}">
 
-            <input type="hidden" id="id" th:field="*{id}">
+            <!--<th:block th:include="fragments/MensagensErroValidacao"></th:block>-->
+
+            <div class="row">
+                <table class="table" id="productsToSell">
+                    <thead>
+                    <tr>
+                        <th scope="col">Qtd</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Unit Value</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2 form-group">
+                    <label for="product" class="control-label" th:text="#{selling.total}"></label>
+                    <label type="text" id="sellingTotal" class="form-control"disabled /> <!--th:field="*{sell.totalSell}"-->
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-2 form-group">
+                    <input type="button" class="form-control btn btn-success" id="sumTotal" th:value="#{sum}" />
+                </div>
+
+            </div>
+
 
             <div class="row">
                 <div class="col-sm-1 form-group">
                     <label for="qtdSelling" class="control-label" th:text="#{selling.qtd}"></label>
-                    <input type="number" min="1" max="100" id="qtdSelling" value="1" class="form-control" th:field="*{qtd}">
+                    <input type="number" min="1" max="100" id="qtdSelling" value="1" class="form-control" th:field="*{qtd}"/>
                 </div>
 
                 <div class="col-sm-2 form-group">
@@ -70,40 +108,6 @@
 
         </form>
 
-
-            <div class="row">
-                <table class="table" id="productsToSell">
-                    <thead>
-                    <tr>
-                        <th scope="col">Qtd</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Unit Value</th>
-                        <th scope="col">Discount</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-2 form-group">
-                    <label for="product" class="control-label" th:text="#{selling.total}"></label>
-                    <input type="text" id="sellingTotal" class="form-control"disabled > <!--th:field="*{sell.totalSell}"-->
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-sm-2 form-group">
-                    <input type="button" class="form-control btn btn-success" id="sumTotal" th:value="#{sum}" />
-                </div>
-
-            </div>
 
 
 

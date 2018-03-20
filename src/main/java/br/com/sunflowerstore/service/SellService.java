@@ -15,11 +15,16 @@ public class SellService {
         this.sellRepository = sellRepository;
     }
 
-    public void add(ItemSell itemSell, Sell sell) {
+    public void add(ItemSell itemSell) {
+        if(itemSell.getSell()!= null) {
+            itemSell.setSell(new Sell());
+        } else {
+            //itemSell.setSell(itemSell.getSell().addProduct());
+        }
         //String nomeProduct = itemSell.getProduct().getNome();
 
-        sell.addProduct(itemSell);
-        System.out.println(sell.getItemSell().toString());
+        //sell.addProduct(itemSell);
+        //System.out.println(sell.getItems().toString());
     }
 
 }

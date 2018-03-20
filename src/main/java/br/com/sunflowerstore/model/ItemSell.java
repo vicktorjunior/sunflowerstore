@@ -12,16 +12,12 @@ public class ItemSell {
 
     private Integer qtd;
 
-    private BigDecimal unitValue;
+    private BigDecimal desconto;
 
-    private BigDecimal discount;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @OneToOne
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "sell_id")
     private Sell sell;
 
     public Long getId() {
@@ -48,28 +44,10 @@ public class ItemSell {
         this.product = product;
     }
 
-    public Sell getSell() {
-        return sell;
-    }
-
-    public void setSell(Sell sell) {
-        this.sell = sell;
-    }
-
+    @Transient
     public BigDecimal getUnitValue() {
-        return unitValue;
-    }
 
-    public void setUnitValue(BigDecimal unitValue) {
-        this.unitValue = unitValue;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
+        return desconto.multiply(product.getPrecoVenda());
     }
 
     @Override
@@ -77,10 +55,23 @@ public class ItemSell {
         return "ItemSell{" +
                 "id=" + id +
                 ", qtd=" + qtd +
-                ", unitValue=" + unitValue +
-                ", discount=" + discount +
                 ", product=" + product +
-                ", sell=" + sell +
                 '}';
+    }
+
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(BigDecimal desconto) {
+        this.desconto = desconto;
+    }
+
+    public Sell getSell() {
+        return sell;
+    }
+
+    public void setSell(Sell sell) {
+        this.sell = sell;
     }
 }
