@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,7 +27,7 @@ public class SellController {
     @Autowired
     private SellService sellService;
 
-    private Sell sell = new Sell();
+
 
     public SellController(ProductService productService) {
 		this.productService= productService;
@@ -34,24 +35,27 @@ public class SellController {
 
 	@RequestMapping("new")
     public ModelAndView novo(ItemSell itemSell) {
+        Sell sell = new Sell();
         ModelAndView mv = new ModelAndView("sell/new");
         mv.addObject("produtos", productService.listInStock());
+        mv.addObject("sell",sell);
         return mv;
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
-    public ModelAndView add(@ModelAttribute("itemSell")@Valid ItemSell itemSell, BindingResult result,
-                            RedirectAttributes redirectAttributes, Model model) {
+    @ResponseBody
+    public void add(@ModelAttribute("itemSell")@Valid ItemSell itemSell, BindingResult result,
+                            RedirectAttributes redirectAttributes, Model model, Sell sell) {
         if (result.hasErrors()) {
             System.out.println("errou!");
-            return novo(itemSell);
+          //  return novo(itemSell);
         }
 
             sellService.add(itemSell, sell);
 
 
 
-        return new ModelAndView("redirect:/sell/new");
+        //return new ModelAndView("redirect:/sell/new");
 
         //Product product = productService.get();
         //sellService.add(product, sell);

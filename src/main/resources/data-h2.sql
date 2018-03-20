@@ -33,3 +33,5 @@ insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fo
 ('Guarda-chuva','Guarda-chuva','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,24.99,1,11);
 
 
+
+

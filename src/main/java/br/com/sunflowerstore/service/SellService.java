@@ -16,6 +16,8 @@ public class SellService {
     }
 
     public void add(ItemSell itemSell, Sell sell) {
+        //String nomeProduct = itemSell.getProduct().getNome();
+
         sell.addProduct(itemSell);
         System.out.println(sell.getItemSell().toString());
     }
