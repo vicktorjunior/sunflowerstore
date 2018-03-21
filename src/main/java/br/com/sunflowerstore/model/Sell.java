@@ -52,7 +52,9 @@ public class Sell {
     public BigDecimal getTotalSell(Integer id) {
         BigDecimal totalSell = new BigDecimal(0);
         for (ItemSell item : items) {
-            totalSell+=item.getUnitValue().multiply(new BigDecimal(item.getQtd());
+            int qtdInt = item.getQtd();
+            BigDecimal qtdBD = new BigDecimal(qtdInt);
+            totalSell.add(item.getUnitValue().multiply(qtdBD));
         }
         return totalSell;
     }
