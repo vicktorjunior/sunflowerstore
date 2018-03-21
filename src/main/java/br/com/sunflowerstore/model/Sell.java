@@ -1,6 +1,7 @@
 package br.com.sunflowerstore.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,5 +46,14 @@ public class Sell {
 
     public void addProduct(ItemSell item) {
         items.add(item);
+    }
+
+    @Transient
+    public BigDecimal getTotalSell(Integer id) {
+        BigDecimal totalSell = new BigDecimal(0);
+        for (ItemSell item : items) {
+            totalSell+=item.getUnitValue().multiply(new BigDecimal(item.getQtd());
+        }
+        return totalSell;
     }
 }
