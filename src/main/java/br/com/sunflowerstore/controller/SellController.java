@@ -1,6 +1,7 @@
 package br.com.sunflowerstore.controller;
 
 import br.com.sunflowerstore.model.ItemSell;
+import br.com.sunflowerstore.model.wrapper.ItemSellWrapper;
 import br.com.sunflowerstore.service.ProductService;
 import br.com.sunflowerstore.service.SellService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class SellController {
         ModelAndView mv = new ModelAndView("sell/new");
 
         mv.addObject("produtos", productService.listInStock());
-        mv.addObject("items", items);
+        mv.addObject("itemSellWrapper",new ItemSellWrapper());
         return mv;
     }
 
