@@ -28,7 +28,7 @@
         <form method="POST" th:object="${itemSellWrapper}" class="form-vertical js-form-loading" th:action="@{/sell/add}">
 
             <!--<th:block th:include="fragments/MensagensErroValidacao"></th:block>-->
-
+            <input type="hidden" th:field="*{itemSellList[0].sell.codigo}" th:id="${sellid}">
 
             <div class="row">
                 <table class="table" id="productsToSell">
@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{selling.total}"></label>
-                    <label type="text" id="sellingTotal" class="form-control"disabled /> <!--th:field="*{sell.totalSell}"-->
+                    <label type="text" id="sellingTotal" class="form-control" disabled /> <!--th:field="*{sell.totalSell}"-->
                 </div>
 
             </div>
@@ -82,10 +82,10 @@
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.nome}"></label>
                     <div class="pt-field-action">
-                        <select id="products" class="form-control" th:field="*{itemSellList[0].product}" >
+                        <select id="products" class="form-control" th:field="*{itemSellList[0].product.codigo}" >
                             <!--<input type="hidden" th:id="itemSellList[__${stat.index}__].product.codigo" th:name="itemSellList[__${stat.index}__].product.codigo"/>-->
                             <option value="" th:text="#{product.list}"></option>
-                            <option th:each="product:${produtos}" th:value="${product.precoVenda}" th:text="${product.nome}"></option>
+                            <option th:each="product:${produtos}" th:value="${product.codigo}" th:text="${product.nome}"></option>
                         </select>
                     </div>
 

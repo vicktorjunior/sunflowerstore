@@ -1,6 +1,7 @@
 package br.com.sunflowerstore.controller;
 
 import br.com.sunflowerstore.model.ItemSell;
+import br.com.sunflowerstore.model.Sell;
 import br.com.sunflowerstore.model.wrapper.ItemSellWrapper;
 import br.com.sunflowerstore.service.ProductService;
 import br.com.sunflowerstore.service.SellService;
@@ -13,8 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/sell/")
@@ -34,19 +33,23 @@ public class SellController {
 
 	@RequestMapping("new")
     public ModelAndView novo(ItemSell itemSell) {
-        List<ItemSell> items = new ArrayList<>();
-        items.add(new ItemSell());
+        /*List<ItemSell> items = new ArrayList<>();
+        items.add(new ItemSell());*/
+
+
 
         ModelAndView mv = new ModelAndView("sell/new");
 
+
         mv.addObject("produtos", productService.listInStock());
         mv.addObject("itemSellWrapper",new ItemSellWrapper());
+        mv.addObject("sell", new Sell());
         return mv;
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
-    public void add(@ModelAttribute("itemSell")@Valid ItemSell itemSell, @RequestParam("sell-id") Long id, BindingResult result,
+    public void add(@ModelAttribute("itemSell")@Valid ItemSell itemSell, @RequestParam("sellid") Long id, BindingResult result,
                             RedirectAttributes redirectAttributes, Model model) {
         if (result.hasErrors()) {
             System.out.println("errou!");

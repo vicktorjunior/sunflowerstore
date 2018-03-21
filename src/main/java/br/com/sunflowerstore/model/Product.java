@@ -20,7 +20,7 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // usa o autoincremento no código
-	private long codigo; // TODO: RNG 003
+	private Long codigo; // TODO: RNG 003
 
 	@NotBlank(message = "Apelido é obrigatório")
 	private String apelido; // TODO: RNG 003
