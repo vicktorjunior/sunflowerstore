@@ -25,10 +25,10 @@
         https://stackoverflow.com/questions/38637513/input-in-array-thymeleaf
         -->
 
-        <form method="POST" th:object="${itemSellWrapper}" class="form-vertical js-form-loading" th:action="@{/sell/add}">
+
 
             <!--<th:block th:include="fragments/MensagensErroValidacao"></th:block>-->
-            <input type="hidden" th:field="*{itemSellList[0].sell.codigo}" th:id="${sellid}">
+            <input type="hidden" th:text="*{codigo}" >
 
             <div class="row">
                 <table class="table" id="productsToSell">
@@ -44,12 +44,12 @@
                     </thead>
                     <tbody>
                     <tbody>
-                    <tr th:each="itemSell, rowStat : *{itemSellList}"	th:class="${rowStat.even ? 'even' : 'odd'}">
+                    <!--<tr th:each="itemSell, rowStat : *{itemSellList}"	th:class="${rowStat.even ? 'even' : 'odd'}">
                         <td><input type="text" th:field="*{itemSellList[__${rowStat.index}__].id}" readonly="readonly" /></td>
                         <td><input type="text" th:field="*{itemSellList[__${rowStat.index}__].qtd}" /></td>
                         <td><input type="text" th:field="*{itemSellList[__${rowStat.index}__].product.nome}" /></td>
                         <td><a th:href="@{/sell/new/} + *{itemSellList[__${rowStat.index}__].id} +  '/'">Delete</a></td>
-                    </tr>
+                    </tr>-->
                     </tbody>
 
                     </tbody>
@@ -72,20 +72,22 @@
 
             </div>
 
+        <form method="POST" th:object="${itemSell}" class="form-vertical js-form-loading" th:action="@{/sell/add}">
+
 
             <div class="row">
                 <div class="col-sm-1 form-group">
                     <label for="qtdSelling" class="control-label" th:text="#{selling.qtd}"></label>
-                    <input type="number" min="1" max="100" id="qtdSelling" value="1" class="form-control" th:field="*{itemSellList[0].qtd}"/>
+                    <input type="number" min="1" max="100"  value="1" class="form-control" th:field="*{qtd}"/>
                 </div>
 
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.nome}"></label>
                     <div class="pt-field-action">
-                        <select id="products" class="form-control" th:field="*{itemSellList[0].product.codigo}" >
+                        <select  class="form-control" th:field="*{product.codigo}" >
                             <!--<input type="hidden" th:id="itemSellList[__${stat.index}__].product.codigo" th:name="itemSellList[__${stat.index}__].product.codigo"/>-->
                             <option value="" th:text="#{product.list}"></option>
-                            <option th:each="product:${produtos}" th:value="${product.codigo}" th:text="${product.nome}"></option>
+                            <option th:each="prod:${produtos}" th:value="${prod.codigo}" th:text="${prod.nome}"></option>
                         </select>
                     </div>
 
@@ -93,21 +95,21 @@
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.precoVenda}"></label>
-                    <input type="text" id="sellingPrice" class="form-control" th:field="*{itemSellList[0].product.precoCompra}" th:text="${product == null ? '' : product.precoVenda}" disabled >
+                   <!-- <input type="text" id="sellingPrice" class="form-control" th:text="${product == null ? '' : product.precoVenda}" disabled > METODO AJAX PARA ATUALIZAR CONFORME SELECT -->
                 </div>
 
 
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.desconto}"></label>
                     <div class="input-group">
-                        <input type="number" id="desconto" class="form-control" th:field="*{itemSellList[0].desconto}" value="0" min="0">
+                        <input type="number" id="desconto" class="form-control" th:field="*{desconto}" value="0" min="0">
                         <span class="input-group-addon" id="basic-addon2">%</span>
                     </div>
                 </div>
 
                 <div class="col-sm-2 form-group">
                     <label for="totProd" class="control-label" th:text="#{selling.total}"></label>
-                    <input type="text" id="totProd" class="form-control"  disabled ><!--th:field="*{itemSellList[0].sell.totalSell}"-->
+                   <!-- <input type="text" id="totProd" class="form-control"  disabled >--><!--th:field="*{itemSellList[0].sell.totalSell}"-->
                 </div>
 
                 <div id="hidden" class="col-sm-2 form-group">

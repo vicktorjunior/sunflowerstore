@@ -2,14 +2,15 @@ package br.com.sunflowerstore.controller;
 
 import br.com.sunflowerstore.model.ItemSell;
 import br.com.sunflowerstore.model.Sell;
-import br.com.sunflowerstore.model.wrapper.ItemSellWrapper;
 import br.com.sunflowerstore.service.ProductService;
 import br.com.sunflowerstore.service.SellService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -42,19 +43,21 @@ public class SellController {
 
 
         mv.addObject("produtos", productService.listInStock());
-        mv.addObject("itemSellWrapper",new ItemSellWrapper());
+        mv.addObject("itemSell",new ItemSell());
         mv.addObject("sell", new Sell());
         return mv;
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
-    public void add(@ModelAttribute("itemSell")@Valid ItemSell itemSell, @RequestParam("sellid") Long id, BindingResult result,
+    public void add(@Valid ItemSell itemSell, BindingResult result,
                             RedirectAttributes redirectAttributes, Model model) {
         if (result.hasErrors()) {
             System.out.println("errou!");
           //  return novo(itemSell);
         }
+
+        itemSell.setProduct(productService.get(itemSell.getProduct().getCodigo()));
 
             sellService.add(itemSell);
 

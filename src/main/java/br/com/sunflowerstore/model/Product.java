@@ -66,13 +66,20 @@ public class Product {
 	@NotNull(message = "Quantidade em Estoque é obrigatório")
 	private Integer qtd; // TODO: RNG 003
 
-
-	public long getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(long codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 
 	public String getNome() {
@@ -89,6 +96,38 @@ public class Product {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public LocalDate getDataCompra() {
+		return dataCompra;
+	}
+
+	public void setDataCompra(LocalDate dataCompra) {
+		this.dataCompra = dataCompra;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public Origin getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(Origin origin) {
+		this.origin = origin;
 	}
 
 	public BigDecimal getPrecoCompra() {
@@ -108,7 +147,7 @@ public class Product {
 	}
 
 	public BigDecimal getPercentual() {
-		return ((precoVenda.subtract(precoCompra)).divide(precoCompra).multiply(new BigDecimal(100)));
+		return percentual;
 	}
 
 	public void setPercentual(BigDecimal percentual) {
@@ -121,62 +160,5 @@ public class Product {
 
 	public void setQtd(Integer qtd) {
 		this.qtd = qtd;
-	}
-
-	public Supplier getSupplier() {
-		return supplier;
-	}
-
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public String getApelido() {
-		return apelido;
-	}
-
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
-	}
-
-	public LocalDate getDataCompra() {
-		return dataCompra;
-	}
-
-	public void setDataCompra(LocalDate dataCompra) {
-		this.dataCompra = dataCompra;
-	}
-
-	public Origin getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(Origin origin) {
-		this.origin = origin;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		Product product = (Product) o;
-
-		return codigo == product.codigo;
-	}
-
-	@Override
-	public int hashCode() {
-		return (int) (codigo ^ (codigo >>> 32));
 	}
 }

@@ -20,6 +20,10 @@ public class ItemSell {
     @ManyToOne
     private Sell sell;
 
+    public ItemSell() {
+        product = new Product();
+    }
+
     public Long getId() {
         return id;
     }
