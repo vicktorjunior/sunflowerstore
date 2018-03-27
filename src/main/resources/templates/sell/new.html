@@ -72,7 +72,7 @@
 
             </div>
 
-        <form method="POST" th:object="${itemSell}" class="form-vertical js-form-loading" th:action="@{/sell/add}">
+        <form method="POST" th:object="${itemSell}" class="form-vertical js-form-loading" th:action="@{/sell/add}" id="formItem">
 
 
             <div class="row">
@@ -84,7 +84,7 @@
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.nome}"></label>
                     <div class="pt-field-action">
-                        <select  class="form-control" th:field="*{product.codigo}" >
+                        <select id="selectProd" class="form-control" th:field="*{product.codigo}" >
                             <!--<input type="hidden" th:id="itemSellList[__${stat.index}__].product.codigo" th:name="itemSellList[__${stat.index}__].product.codigo"/>-->
                             <option value="" th:text="#{product.list}"></option>
                             <option th:each="prod:${produtos}" th:value="${prod.codigo}" th:text="${prod.nome}"></option>
@@ -93,9 +93,9 @@
 
 
                 </div>
-                <div class="col-sm-2 form-group">
-                    <label for="product" class="control-label" th:text="#{product.list.precoVenda}"></label>
-                   <!-- <input type="text" id="sellingPrice" class="form-control" th:text="${product == null ? '' : product.precoVenda}" disabled > METODO AJAX PARA ATUALIZAR CONFORME SELECT -->
+                <div th:fragment="pVenda" class="col-sm-2 form-group">
+                    <label class="control-label" th:text="#{product.list.precoVenda}"></label>
+                   <input type="text" id="pVenda" class="form-control" th:text="${product == null ? '' : product.precoVenda}" disabled >
                 </div>
 
 
@@ -132,6 +132,27 @@
 
 
 </section>
+
+<th:block layout:fragment="js-view">
+    <>
+        $(document).ready(function() {
+            $("#selectProd").change(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/sell/changeValue/",
+                    data : $("#formItem").serialize(),
+                    error: function(result) {
+                        alert('error');
+                    },
+                    success : function(data, textStatus, jqXHR) {
+                        $('#pVenda').replaceWith(data);
+                    }
+                });
+            })
+        });
+    </>
+</th:block>
 
 
 </body>

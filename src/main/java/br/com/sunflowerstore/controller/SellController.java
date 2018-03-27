@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/sell/")
@@ -69,6 +70,14 @@ public class SellController {
         //sellService.add(product, sell);
 
         //System.out.println(sell.toString());
+    }
+
+
+    @RequestMapping(value = "changeValue", method = RequestMethod.POST)
+    @ResponseBody
+    public BigDecimal changeValue(ItemSell itemSell) {
+        return itemSell.getUnitValue();
+
     }
 
 
