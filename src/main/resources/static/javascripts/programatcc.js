@@ -26,9 +26,9 @@
     });
 
     // updating selling price text field through JS
-    $('#products').change(function () {
+    /*$('#products').change(function () {
        $('#sellingPrice').val($('#products').val()).toString();
-    });
+    });*/
     
     // updating total selling price according to product value and quantity
     /*$('#qtdSelling').change(function () {
@@ -72,17 +72,17 @@
         });
 
         $('#qtdSelling').val(1);
-        $('#products').prop('selectedIndex',0);
+        $('#selectProd').prop('selectedIndex',0);
         $('#desconto').val(0);
-        $('#sellingPrice').val(0);
+        $('#pVenda').val(0);
         $('#totProd').val(0)
         
     });
     
     
-    $("#desconto, #qtdSelling, #products").change(function () {
+    $("#desconto, #qtdSelling, #selectProd").change(function () {
         var qtdSelling = parseInt($('#qtdSelling').val());
-        var sellingPrice = parseFloat($('#sellingPrice').val());
+        var sellingPrice = parseFloat($('#pVenda').val());
         var productName = $('#products :selected').text();
         var discount = ((parseFloat($('#desconto').val())*sellingPrice)/100)*qtdSelling;
         var sellingTotal = (qtdSelling*sellingPrice)-discount;
