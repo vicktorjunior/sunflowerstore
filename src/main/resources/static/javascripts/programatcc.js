@@ -26,9 +26,9 @@
     });
 
     // updating selling price text field through JS
-    $('#products').change(function () {
+    /*$('#products').change(function () {
        $('#sellingPrice').val($('#products').val()).toString();
-    });
+    });*/
     
     // updating total selling price according to product value and quantity
     /*$('#qtdSelling').change(function () {
@@ -72,20 +72,22 @@
         });
 
         $('#qtdSelling').val(1);
-        $('#products').prop('selectedIndex',0);
+        $('#selectProd').prop('selectedIndex',0);
         $('#desconto').val(0);
-        $('#sellingPrice').val(0);
+        $('#pVenda').val(0);
         $('#totProd').val(0)
         
     });
     
     
-    $("#desconto, #qtdSelling, #products").change(function () {
+    $("#desconto, #qtdSelling, #selectProd").change(function () {
         var qtdSelling = parseInt($('#qtdSelling').val());
-        var sellingPrice = parseFloat($('#sellingPrice').val());
+        var sellingPrice = parseFloat($('#pVenda').val());
         var productName = $('#products :selected').text();
-        var discount = ((parseFloat($('#desconto').val())*sellingPrice)/100)*qtdSelling;
+        var discount = ((parseFloat($('#desconto').val())*sellingPrice)/parseInt(100))*qtdSelling;
         var sellingTotal = (qtdSelling*sellingPrice)-discount;
+
+        console.log($('#pVenda').val());
 
         $("#totProd").val(sellingTotal.toFixed(2));
     });
@@ -104,6 +106,24 @@
 
         parseFloat($('#sellingTotal').val(totals));
     });
+
+$(document).ready(function() {
+    $("#selectProd").change(function(e) {
+        var product = $('#selectProd').val();
+        $.ajax({
+            type:'GET',
+            url: '/sell/demo1/'+ product,
+            //contentType: 'application/json',
+            success: function (result) {
+                /* var string = result.toString();
+                 var number = Double.parseDouble(string);*/
+                //var product = result.precoVenda;
+
+                $("#pVenda").val(result);
+            }
+        });
+    })
+});
 
 
 
