@@ -51,6 +51,7 @@ public class SellController {
     public ModelAndView novo(ItemSell itemSell) {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
+        Sell sell = new Sell();
 
 
 
@@ -59,14 +60,15 @@ public class SellController {
 
         mv.addObject("produtos", productService.listInStock());
         mv.addObject("itemSell",new ItemSell());
-        mv.addObject("sell", new Sell());
+        mv.addObject("sell", sell);
+        mv.addObject("items",sell.getItems());
         return mv;
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
-    public void add(@Valid ItemSell itemSell, BindingResult result,
-                            RedirectAttributes redirectAttributes, Model model) {
+    public ModelAndView add(@Valid ItemSell itemSell, BindingResult result,
+                   RedirectAttributes redirectAttributes, Model model) {
         if (result.hasErrors()) {
             System.out.println("errou!");
           //  return novo(itemSell);
@@ -76,9 +78,9 @@ public class SellController {
 
             sellService.add(itemSell);
 
+        ModelAndView mv =  new ModelAndView("redirect:/sell/new");
 
-
-        //return new ModelAndView("redirect:/sell/new");
+        return mv;
 
         //Product product = productService.get();
         //sellService.add(product, sell);
