@@ -101,7 +101,7 @@
     });
 
 $(document).ready(function() {
-    $("#desconto, #qtdSelling, #selectProd").change(function(e) {
+    $("#discount, #qtdSelling, #selectProd").change(function(e) {
         var product = $('#selectProd').val();
         $.ajax({
             type:'GET',
