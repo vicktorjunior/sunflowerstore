@@ -19,28 +19,28 @@
             <th:block th:include="fragments/MensagensErroValidacao"></th:block>
 
             <div class="row">
-                <div class="col-sm-2 form-group" th:classappend="${#fields.hasErrors('apelido')} ? has-error">
-                    <label for="apelido" class="control-label">Apelido</label>
-                    <input id="apelido" type="text" class="form-control" th:field="*{apelido}" required/>
+                <div class="col-sm-2 form-group" th:classappend="${#fields.hasErrors('nickname')} ? has-error">
+                    <label for="nickname" class="control-label">Apelido</label>
+                    <input id="nickname" type="text" class="form-control" th:field="*{nickname}" required/>
                 </div>
 
-                <div class="col-sm-10 form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
-                    <label for="nome" class="control-label">Nome</label>
-                    <input id="nome" class="form-control" th:field="*{nome}" required>
+                <div class="col-sm-10 form-group" th:classappend="${#fields.hasErrors('name')} ? has-error">
+                    <label for="name" class="control-label">Nome</label>
+                    <input id="name" class="form-control" th:field="*{name}" required>
                 </div>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
-                <label for="descricao" class="control-label">Descrição</label>
-                <textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}" required></textarea>
+            <div class="form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
+                <label for="description" class="control-label">Descrição</label>
+                <textarea id="description" rows="3" class="form-control" th:field="*{description}" required></textarea>
             </div>
 
 
             <div class="row">
-                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('dataCompra')} ? has-error">
-                    <label for="dataCompra" class="control-label">Data de Compra</label>
+                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('buyingDate')} ? has-error">
+                    <label for="buyingDate" class="control-label">Data de Compra</label>
                     <div class="input-group">
-                        <input type="date" th:value="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}" required name="dataCompra" id="dataCompra" class="form-control">
+                        <input type="date" th:value="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}" required name="buyingDate" id="buyingDate" class="form-control">
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                         <div class="pt-field-action">
                             <select id="category" class="form-control" th:field="*{category}" required>
                                 <option value="">Selecione a category...</option>
-                                <option th:each="category: ${categorias}" th:value="${category}" th:text="${category.descricao}"></option>
+                                <option th:each="category: ${categorias}" th:value="${category}" th:text="${category.description}"></option>
                             </select>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="pt-field-action">
                         <select id="supplier" class="form-control" th:field="*{supplier}" required>
                             <option value="">Selecione o supplier...</option>
-                            <option th:each="supplier:${fornecedores}" th:value="${supplier.codigo}" th:text="${supplier.nome}"></option>
+                            <option th:each="supplier:${fornecedores}" th:value="${supplier.code}" th:text="${supplier.name}"></option>
                         </select>
 
                         <!--<div class="pt-field-action_icon">
@@ -80,7 +80,7 @@
                         <th:block th:each="origin:${origens}">
                             <div class="radio radio-inline">
                                 <input type="radio" th:id="|id_${origin}|" th:value="${origin}" th:field="*{origin}" required>
-                                <label th:for="|id_${origin}|" th:text="${origin.descricao}">Nacional</label>
+                                <label th:for="|id_${origin}|" th:text="${origin.description}">Nacional</label>
                             </div>
                         </th:block>
                     </div>
@@ -90,27 +90,27 @@
 
             <div class="row">
 
-                <div class="col-lg-3 form-group" th:classappend="${#fields.hasErrors('precoCompra')} ? has-error">
+                <div class="col-lg-3 form-group" th:classappend="${#fields.hasErrors('buyingPrice')} ? has-error">
                     <label for="pcompra" class="control-label">Preço de Compra</label>
                     <div class="input-group">
                         <div class="input-group-addon">R$</div>
-                        <input type="text" id="pcompra" class="form-control js-decimal" th:field="*{precoCompra}" required>
+                        <input type="text" id="pcompra" class="form-control js-decimal" th:field="*{buyingPrice}" required>
                     </div>
                 </div>
 
-                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('percentual')} ? has-error">
+                <div class="col-sm-3 form-group" th:classappend="${#fields.hasErrors('percentage')} ? has-error">
                     <label for="percen" class="control-label">Percentual Venda/Compra</label>
                     <div class="input-group">
-                        <input type="text" max="1000" min="0" id="percen" class="form-control" th:field="*{percentual}" required>
+                        <input type="text" max="1000" min="0" id="percen" class="form-control" th:field="*{percentage}" required>
                         <div class="input-group-addon">%</div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 form-group" th:classappend="${#fields.hasErrors('precoVenda')} ? has-error">
+                <div class="col-lg-3 form-group" th:classappend="${#fields.hasErrors('sellingPrice')} ? has-error">
                     <label for="pvenda" class="control-label">Preço de Venda</label><!--ADICIONAR CÁLCULO PARA GERAR AUTOMATICAMENTE -->
                     <div class="input-group">
                         <div class="input-group-addon">R$</div>
-                        <input type="text" id="pvenda" class="form-control" tabindex="2" th:field="*{precoVenda}" readonly required>
+                        <input type="text" id="pvenda" class="form-control" tabindex="2" th:field="*{sellingPrice}" readonly required>
                     </div>
                 </div>
 

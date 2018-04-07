@@ -12,7 +12,7 @@ public class ItemSell {
 
     private Integer qtd;
 
-    private BigDecimal desconto;
+    private BigDecimal discount;
 
     @OneToOne
     private Product product;
@@ -51,7 +51,7 @@ public class ItemSell {
     @Transient
     public BigDecimal getUnitValue() {
 
-        return desconto.multiply(product.getPrecoVenda());
+        return discount.multiply(product.getSellingPrice());
     }
 
     @Override
@@ -63,12 +63,12 @@ public class ItemSell {
                 '}';
     }
 
-    public BigDecimal getDesconto() {
-        return desconto;
+    public BigDecimal getDiscount() {
+        return discount;
     }
 
-    public void setDesconto(BigDecimal desconto) {
-        this.desconto = desconto;
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
     }
 
     public Sell getSell() {

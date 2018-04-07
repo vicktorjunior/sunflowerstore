@@ -16,10 +16,10 @@
 
 
     // calculation to provide profit percent
-    $('#pcompra').add('#pvenda').keyup(function() {
-        var pcompra = parseFloat($('#pcompra').val());
-        var pvenda = parseFloat($('#pvenda').val());
-        var percen = (parseFloat(((pvenda-pcompra)/pcompra)*100)).toFixed(2);
+    $("#bprice, #sprice").keyup(function() {
+        var bprice = parseFloat($('#bprice').val());
+        var sprice = parseFloat($('#sprice').val());
+        var percen = (parseFloat(((sprice-bprice)/bprice)*100)).toFixed(2);
         var percenString = (parseFloat(percen)).toString();
         //percenString = percenString.replace(".",",");
         $('#percen').val(percenString);
@@ -39,7 +39,7 @@
 */
 
     $(document).ready(function () {
-        $('#desconto').val(0);
+        $('#discount').val(0);
         $('#sellingTotal').val(0);
     });
 
@@ -112,11 +112,11 @@ $(document).ready(function() {
                  var number = Double.parseDouble(string);*/
                 //var product = result.precoVenda;
 
-                $("#pVenda").val(result);
+                $("#sprice").val(result);
                 var qtdSelling = parseInt($('#qtdSelling').val());
-                var sellingPrice = parseFloat($('#pVenda').val());
+                var sellingPrice = parseFloat($('#sprice').val());
                 var productName = $('#selectProd :selected').text();
-                var discount = ((parseFloat($('#desconto').val())*sellingPrice)/parseInt(100))*qtdSelling;
+                var discount = ((parseFloat($('#discount').val())*sellingPrice)/parseInt(100))*qtdSelling;
                 var sellingTotal = (qtdSelling*sellingPrice)-discount;
 
                 $("#totProd").val(sellingTotal.toFixed(2));

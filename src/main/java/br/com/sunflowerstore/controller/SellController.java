@@ -31,24 +31,22 @@ public class SellController {
     @Autowired
     private SellService sellService;
 
+    public SellController(ProductService productService) {
+        this.productService= productService;
+    }
+
 
     @RequestMapping(value = "demo1/{product}", method = RequestMethod.GET, produces = {MimeTypeUtils.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> responseEntity(@PathVariable("product") Long product) {
         try {
-            return new ResponseEntity<String>(String.valueOf(productService.get(product).getPrecoVenda()) ,HttpStatus.OK);
+            return new ResponseEntity<String>(String.valueOf(productService.get(product).getSellingPrice()) ,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
     }
 
-
-
-    public SellController(ProductService productService) {
-		this.productService= productService;
-	}
-
 	@RequestMapping("new")
-    public ModelAndView novo(ItemSell itemSell) {
+    public ModelAndView newSell(ItemSell itemSell) {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
         Sell sell = new Sell();
@@ -71,10 +69,10 @@ public class SellController {
                    RedirectAttributes redirectAttributes, Model model) {
         if (result.hasErrors()) {
             System.out.println("errou!");
-          //  return novo(itemSell);
+          //  return newProduct(itemSell);
         }
 
-        itemSell.setProduct(productService.get(itemSell.getProduct().getCodigo()));
+        itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
 
             sellService.add(itemSell);
 

@@ -10,10 +10,10 @@ import org.springframework.util.StringUtils;
 public class SupplierConverter implements Converter<String,Supplier> {
 
     @Override
-    public Supplier convert(String codigo) {
-        if(!StringUtils.isEmpty(codigo)) {
+    public Supplier convert(String code) {
+        if(!StringUtils.isEmpty(code)) {
             Supplier supplier = new Supplier();
-            supplier.setCodigo(Long.valueOf(codigo));
+            supplier.setCode(Long.valueOf(code));
             return supplier;
         }
         return null;

@@ -17,15 +17,15 @@ public enum Category {
     BANHEIRO("Banheiro"),
     ELETRÔNICO("Eletrônico");
 
-    private String descricao;
+    private String description;
 
-    Category(String descricao) {
-        this.descricao=descricao;
+    Category(String description) {
+        this.description = description;
 
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
 }

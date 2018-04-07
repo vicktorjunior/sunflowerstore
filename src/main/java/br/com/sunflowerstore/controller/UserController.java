@@ -30,7 +30,7 @@ public class UserController {
 	}
 
     @RequestMapping("new")
-    public ModelAndView novo(User user) {
+    public ModelAndView newUser(User user) {
         ModelAndView mv = new ModelAndView("users/new");
 
         return mv;

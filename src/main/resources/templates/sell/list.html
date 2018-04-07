@@ -31,8 +31,8 @@
         <form method="get" class="form-vertical">
 
             <div class="form-group">
-                <label for="input-product-nome" th:text="#{product.name}">Nome</label>
-                <input id="input-product-nome" type="text" class="form-control">
+                <label for="input-product-name" th:text="#{product.name}">Nome</label>
+                <input id="input-product-name" type="text" class="form-control">
             </div>
 
             <div class="row">
@@ -78,9 +78,9 @@
                 <tr>
                     <th th:if="${action=='list'}"
                         th:text="#{product.list.id}"></th>
-                    <th th:text="#{product.list.nome}"></th>
+                    <th th:text="#{product.list.name}"></th>
                     <th th:text="#{product.list.supplier}"></th>
-                    <th th:text="#{product.list.precoCompra}"></th>
+                    <th th:text="#{product.list.buyingPrice}"></th>
                     <th th:text="#{product.list.options}"></th> <!--TODO: RNG001-->
                 </tr>
                 </thead>
@@ -102,7 +102,7 @@
                            th:if="${action=='manage'}"></a>-->
 
                         <a th:if="${action=='list'}"  class="btn btn-default" id="btn-edit"
-                           th:text="#{product.edit}" th:href="@{|edit/${product.codigo}|}" href="#">
+                           th:text="#{product.edit}" th:href="@{|edit/${product.code}|}" href="#">
                         </a>
 
                         <a href="#"
@@ -110,12 +110,12 @@
                            class="btn btn-danger"
                            th:text="#{product.delete}" id="btn-delete"
                            th:if="${action=='list'}"
-                           th:href="@{|delete/${product.codigo}|}">
+                           th:href="@{|delete/${product.code}|}">
                         </a>
 
                         <a th:if="${action=='list'}"
                                 class="btn btn-info" id="btn-view"
-                                th:text="#{product.view}" th:href="@{|view/${product.codigo}|}" href="#">
+                                th:text="#{product.view}" th:href="@{|view/${product.code}|}" href="#">
                         </a>
 
                     </td>

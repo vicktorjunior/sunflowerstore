@@ -13,16 +13,16 @@ import java.math.BigDecimal;
 public class BuyingPriceConverter implements Converter<String, BigDecimal> {
 
 	@Override
-	public BigDecimal convert(String precoString) {
-		if (!StringUtils.isEmpty(precoString)) {
+	public BigDecimal convert(String priceString) {
+		if (!StringUtils.isEmpty(priceString)) {
 
-			precoString = precoString.replace(".", "");
+			priceString = priceString.replace(".", "");
 
-			precoString = precoString.replace(",", ".");
+			priceString = priceString.replace(",", ".");
 
-			return new BigDecimal(precoString);
+			return new BigDecimal(priceString);
 
 		}
-		return new BigDecimal(precoString);
+		return new BigDecimal(priceString);
 	}
 }

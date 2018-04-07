@@ -13,12 +13,12 @@ import org.thymeleaf.templatemode.TemplateMode;
  */
 public class MessageElementTagProcessor extends AbstractElementTagProcessor {
 
-    public static final String NOME_TAG = "message";
-    public static final int PRECEDENCIA = 1000;
+    public static final String TAG_NAME = "message";
+    public static final int PRECEDENCE = 1000;
 
 
     public MessageElementTagProcessor(String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, NOME_TAG, true, null, false, PRECEDENCIA);
+        super(TemplateMode.HTML, dialectPrefix, TAG_NAME, true, null, false, PRECEDENCE);
     }
 
     @Override

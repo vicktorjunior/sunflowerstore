@@ -13,19 +13,19 @@ public class Sell {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // usa o autoincremento no código
-    private long codigo; // TODO: RNG 003
+    private long code; // TODO: RNG 003
 
     @OneToMany(mappedBy = "sell")
     private List<ItemSell> items = new ArrayList<ItemSell>();
 
     private LocalDateTime time;
 
-    public long getCodigo() {
-        return codigo;
+    public long getCode() {
+        return code;
     }
 
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
+    public void setCode(long code) {
+        this.code = code;
     }
 
     public LocalDateTime getTime() {

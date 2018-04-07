@@ -2,7 +2,7 @@ package br.com.sunflowerstore.controller;
 
 import br.com.sunflowerstore.model.Supplier;
 import br.com.sunflowerstore.service.SupplierService;
-import br.com.sunflowerstore.service.exception.NomeFornecedorJaCadastradoException;
+import br.com.sunflowerstore.service.exception.SupplierAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,32 +28,32 @@ public class SupplierController {
 	private SupplierService supplierService;
 
 	@RequestMapping("new")
-	public ModelAndView novo(Supplier supplier) {
+	public ModelAndView newSupplier(Supplier supplier) {
 		return new ModelAndView("supplier/new");
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid Supplier supplier, BindingResult result,
-								  RedirectAttributes redirectAttributes) {
+	public ModelAndView saveSupplier(@Valid Supplier supplier, BindingResult result,
+									 RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return novo(supplier);
+			return newSupplier(supplier);
 		}
 		try {
-			supplierService.salvar(supplier);
-		} catch (NomeFornecedorJaCadastradoException e) {
+			supplierService.save(supplier);
+		} catch (SupplierAlreadyExistsException e) {
 			result.rejectValue("nome", e.getMessage(), e.getMessage());
-			return novo(supplier);
+			return newSupplier(supplier);
 		}
 		redirectAttributes.addFlashAttribute("mensagem", "Supplier Salvo com Sucesso"); // TODO: MSG003
 		return new ModelAndView("redirect:/supplier/new");
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Supplier supplier, BindingResult result) {
+	public @ResponseBody ResponseEntity<?> save(@RequestBody @Valid Supplier supplier, BindingResult result) {
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
 		}
-		supplier = supplierService.salvar(supplier);
+		supplier = supplierService.save(supplier);
 		return ResponseEntity.ok(supplier);
 	}
 }

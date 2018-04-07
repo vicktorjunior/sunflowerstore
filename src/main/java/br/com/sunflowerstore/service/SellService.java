@@ -21,7 +21,7 @@ public class SellService {
         } else {
             //itemSell.setSell(itemSell.getSell().addProduct());
         }
-        //String nomeProduct = itemSell.getProduct().getNome();
+        //String nomeProduct = itemSell.getProduct().getName();
 
         //sell.addProduct(itemSell);
         //System.out.println(sell.getItems().toString());

@@ -16,20 +16,20 @@ insert into user_roles (user_id, roles_id) values
 (1, 1);
 
 -- SUPPLIER
-insert into fornecedores (nome) values
+insert into fornecedores (name) values
   ('teste fornecedor');
 
 -- PRODUCT
-insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+insert into product (nickname, name, description, buying_date, category, codigo_fornecedor, origin, buying_price, selling_price, percentage, quantidade_estoque) values
   ('Piercing','Piercing','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,5.00,1,11);
 
-insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+insert into product (nickname, name, description, buying_date, category, codigo_fornecedor, origin, buying_price, selling_price, percentage, quantidade_estoque) values
 ('Bola','Bola','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,25.00,1,11);
 
-insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+insert into product (nickname, name, description, buying_date, category, codigo_fornecedor, origin, buying_price, selling_price, percentage, quantidade_estoque) values
 ('Amoeba','Amoeba','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,10.00,1,0);
 
-insert into produtos (apelido, nome, descricao, data_compra, category, codigo_fornecedor, origin, preco_compra, preco_venda, percentual, quantidade_estoque) values
+insert into product (nickname, name, description, buying_date, category, codigo_fornecedor, origin, buying_price, selling_price, percentage, quantidade_estoque) values
 ('Guarda-chuva','Guarda-chuva','aaa', TO_DATE('17/12/2015', 'DD/MM/YYYY'),'BRINQUEDO', 1, 1, 1.11,24.99,1,11);
 
 

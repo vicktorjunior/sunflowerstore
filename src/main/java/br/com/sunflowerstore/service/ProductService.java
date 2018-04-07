@@ -3,7 +3,7 @@ package br.com.sunflowerstore.service;
 import br.com.sunflowerstore.model.Product;
 import br.com.sunflowerstore.repository.ProductRepository;
 import br.com.sunflowerstore.service.exception.GenericException;
-import br.com.sunflowerstore.service.exception.ProdutoJaCadastradoException;
+import br.com.sunflowerstore.service.exception.ProductAlreadyExistsException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -22,40 +22,40 @@ public class ProductService {
     private final ProductRepository productRepository;
 	private final JavaMailSender javaMailSender;
 
-	public ProductService(ProductRepository produtos, JavaMailSender javaMailSender) {
-		this.productRepository = produtos;
+	public ProductService(ProductRepository products, JavaMailSender javaMailSender) {
+		this.productRepository = products;
 		this.javaMailSender = javaMailSender;
 
 	}
 
     @Transactional
-    public Product salvar(Product product) {
-		String nomeProduct = product.getNome();
-    	/*product.setApelido(validaApelido(product.getApelido()));
+    public Product save(Product product) {
+		String nameProduct = product.getName();
+    	/*product.setNickname(validaApelido(product.getNickname()));
     	product.setCategory(product.getCategory());
-    	product.setDataCompra(product.getDataCompra());
-    	product.setDescricao(product.getDescricao());
+    	product.setBuyingDate(product.getBuyingDate());
+    	product.setDescription(product.getDescription());
     	product.setOrigin(product.getOrigin());
-    	product.setPrecoCompra(product.getPrecoCompra());
-    	product.setPrecoVenda(product.getPrecoVenda());
-    	product.setPercentual(product.getPercentual());*/
-    	if (productRepository.findByNomeIgnoreCase(nomeProduct).isEmpty()) {
+    	product.setBuyingPrice(product.getBuyingPrice());
+    	product.setSellingPrice(product.getSellingPrice());
+    	product.setPercentage(product.getPercentage());*/
+    	if (productRepository.findByNameIgnoreCase(nameProduct).isEmpty()) {
 			return productRepository.save(product);
 		} else {
-			throw new ProdutoJaCadastradoException("Product já existe no sistema!");
+			throw new ProductAlreadyExistsException("Product já existe no sistema!");
 		}
 
     }
 
 
     //TODO: RNG002
-    private String validaApelido(String apelido) {
-    	if (StringUtils.hasText(apelido)) {
-    		apelido = apelido.trim().toUpperCase();
-    		if (!Pattern.matches("([a-zA-Z]{2}\\d{4})?", apelido)) {
+    private String validaApelido(String nickname) {
+    	if (StringUtils.hasText(nickname)) {
+    		nickname = nickname.trim().toUpperCase();
+    		if (!Pattern.matches("([a-zA-Z]{2}\\d{4})?", nickname)) {
     			throw new GenericException("apelido", "Apelido deve seguir o padrão XX9999");
     		}
-    		return apelido;    		
+    		return nickname;
     	} 
     	return null;
     }
@@ -76,13 +76,13 @@ public class ProductService {
 		SimpleMailMessage mail = new SimpleMailMessage();
 
 		if (product != null ) {
-			if (product.getNome() != null) {
+			if (product.getName() != null) {
 					mail.setTo("sellstockapp@gmail.com");
 					mail.setFrom("sellstockapp@gmail.com");
-					mail.setSubject("Um novo produto foi cadastrado com sucesso!");
+					mail.setSubject("Um newProduct produto foi cadastrado com sucesso!");
 					mail.setText(
 							"Prezado(a) Administrador(a). Seu produto: '"
-									+ product.getNome() + "' foi cadastrado com sucesso!\n");
+									+ product.getName() + "' foi cadastrado com sucesso!\n");
 					javaMailSender.send(mail);
 
 

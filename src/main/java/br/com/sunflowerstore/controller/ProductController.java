@@ -5,7 +5,7 @@ import br.com.sunflowerstore.enums.Origin;
 import br.com.sunflowerstore.model.Product;
 import br.com.sunflowerstore.service.ProductService;
 import br.com.sunflowerstore.service.SupplierService;
-import br.com.sunflowerstore.service.exception.ProdutoJaCadastradoException;
+import br.com.sunflowerstore.service.exception.ProductAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +30,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@RequestMapping("new")
-	public ModelAndView novo(Product product) {
+	public ModelAndView newProduct(Product product) {
 		ModelAndView mv = new ModelAndView("product/new");
 		mv.addObject("categorias", Category.values());
 		mv.addObject("fornecedores", supplierService.listAll());
@@ -39,17 +39,16 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "new", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@ModelAttribute("product")@Valid Product product, BindingResult result,
-								  RedirectAttributes redirectAttributes, Model model) {
+	public ModelAndView saveProduct(@ModelAttribute("product")@Valid Product product, BindingResult result,
+									RedirectAttributes redirectAttributes, Model model) {
 		if (result.hasErrors()) {
-			System.out.println("errou!");
-			return novo(product);
+			return newProduct(product);
 		}
 		try {
-			productService.salvar(product);
-		} catch(ProdutoJaCadastradoException e) {
+			productService.save(product);
+		} catch(ProductAlreadyExistsException e) {
 			result.rejectValue("nome", e.getMessage(), e.getMessage());
-			return novo(product);
+			return newProduct(product);
 		}
 		//productService.sendMessage(product);
 		redirectAttributes.addFlashAttribute("mensagem", "Product Salvo com Sucesso"); // TODO: MSG003

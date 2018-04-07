@@ -8,13 +8,13 @@ public enum Origin {
     NACIONAL("Nacional"),
     IMPORTADO("Importado");
 
-    private String descricao;
+    private String description;
 
-    Origin(String descricao) {
-        this.descricao=descricao;
+    Origin(String description) {
+        this.description = description;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 }

@@ -15,30 +15,30 @@ import java.time.LocalDate;
  * Created by VictorJr on 23/03/2017.
  */
 @Entity
-@Table(name = "produtos") // determina o nome da tabela no banco
+@Table(name = "product") // determina o name da tabela no banco
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // usa o autoincremento no código
-	private Long codigo; // TODO: RNG 003
+	private Long code; // TODO: RNG 003
 
 	@NotBlank(message = "Apelido é obrigatório")
-	private String apelido; // TODO: RNG 003
+	private String nickname; // TODO: RNG 003
 
 	@NotBlank(message = "Nome é obrigatório")
-	private String nome; // TODO: RNG 003
+	private String name; // TODO: RNG 003
 
 	@NotBlank(message = "O tamanho da descrição deve estar entre 1 e 1500")
 	@Size(min = 1, max = 1500)
-	private String descricao; // TODO: RNG 003
+	private String description; // TODO: RNG 003
 
 	//@NotNull(message = "Data de compra é obrigatório")
 	@DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
 	//@Temporal(TemporalType.DATE)
 	//@Column(name = "data_compra")
-	private LocalDate dataCompra; // TODO: RNG 003
+	private LocalDate buyingDate; // TODO: RNG 003
 
-	@Enumerated(EnumType.STRING) // salva como o nome da category
+	@Enumerated(EnumType.STRING) // salva como o name da category
 	@NotNull(message = "Category é obrigatória")
 	private Category category; // TODO: RNG 003
 
@@ -51,59 +51,59 @@ public class Product {
 	@Enumerated
 	private Origin origin; // TODO: RNG 003
 
-	@Column(name = "preco_compra") // determina o nome da coluna no banco
+	@Column(name = "buying_price") // determina o name da coluna no banco
 	@NotNull(message = "Preço de Compra é obrigatório")
-	private BigDecimal precoCompra; // TODO: RNG 003
+	private BigDecimal buyingPrice; // TODO: RNG 003
 
-	@Column(name = "preco_venda")
+	@Column(name = "selling_price")
 	@NotNull(message = "Preço de Venda é obrigatório")
-	private BigDecimal precoVenda; // TODO: RNG 003
+	private BigDecimal sellingPrice; // TODO: RNG 003
 
 	@NotNull(message = "Percentual é obrigatório")
-	private BigDecimal percentual; // TODO: RNG 003
+	private BigDecimal percentage; // TODO: RNG 003
 
 	@Column(name = "quantidade_estoque")
 	@NotNull(message = "Quantidade em Estoque é obrigatório")
 	private Integer qtd; // TODO: RNG 003
 
-	public Long getCodigo() {
-		return codigo;
+	public Long getCode() {
+		return code;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public void setCode(Long code) {
+		this.code = code;
 	}
 
-	public String getApelido() {
-		return apelido;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public LocalDate getDataCompra() {
-		return dataCompra;
+	public LocalDate getBuyingDate() {
+		return buyingDate;
 	}
 
-	public void setDataCompra(LocalDate dataCompra) {
-		this.dataCompra = dataCompra;
+	public void setBuyingDate(LocalDate buyingDate) {
+		this.buyingDate = buyingDate;
 	}
 
 	public Category getCategory() {
@@ -130,28 +130,28 @@ public class Product {
 		this.origin = origin;
 	}
 
-	public BigDecimal getPrecoCompra() {
-		return precoCompra;
+	public BigDecimal getBuyingPrice() {
+		return buyingPrice;
 	}
 
-	public void setPrecoCompra(BigDecimal precoCompra) {
-		this.precoCompra = precoCompra;
+	public void setBuyingPrice(BigDecimal buyingPrice) {
+		this.buyingPrice = buyingPrice;
 	}
 
-	public BigDecimal getPrecoVenda() {
-		return precoVenda;
+	public BigDecimal getSellingPrice() {
+		return sellingPrice;
 	}
 
-	public void setPrecoVenda(BigDecimal precoVenda) {
-		this.precoVenda = precoVenda;
+	public void setSellingPrice(BigDecimal sellingPrice) {
+		this.sellingPrice = sellingPrice;
 	}
 
-	public BigDecimal getPercentual() {
-		return percentual;
+	public BigDecimal getPercentage() {
+		return percentage;
 	}
 
-	public void setPercentual(BigDecimal percentual) {
-		this.percentual = percentual;
+	public void setPercentage(BigDecimal percentage) {
+		this.percentage = percentage;
 	}
 
 	public Integer getQtd() {

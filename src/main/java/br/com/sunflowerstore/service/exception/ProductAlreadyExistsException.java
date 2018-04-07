@@ -3,10 +3,10 @@ package br.com.sunflowerstore.service.exception;
 /**
  * Created by VictorJr on 02/05/2017.
  */
-public class NomeFornecedorJaCadastradoException extends RuntimeException {
+public class ProductAlreadyExistsException extends RuntimeException {
     public static final long serialVersionUID = 1L;
 
-    public NomeFornecedorJaCadastradoException(String message) {
+    public ProductAlreadyExistsException(String message) {
         super(message);
     }
 }

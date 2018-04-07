@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by VictorJr on 31/03/2017.
  */
 @Controller
+@RequestMapping("/customer/")
 public class CustomerController {
-    @RequestMapping("/clientes/novo")
-    public String novo(Customer customer) {
-        return "customer/CadastroCliente";
+    @RequestMapping("new")
+    public String newCustomer(Customer customer) {
+        return "customer/new";
     }
 }

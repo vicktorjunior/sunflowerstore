@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
+@RequestMapping("/category/")
 public class CategoryController {
 
-    @RequestMapping("categorias/nova")
-    public String novo(Category category) {
-        return "category/CadastroCategoria";
+    @RequestMapping("new")
+    public String newCategory(Category category) {
+        return "category/new";
     }
 }

@@ -11,6 +11,6 @@ import java.util.List;
  */
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> { // jpa repository que já tem métodos prontos
-    List<Product> findByNomeIgnoreCase(String nome);
+    List<Product> findByNameIgnoreCase(String nome);
     List<Product> findByQtdGreaterThan(int qtd);
 }

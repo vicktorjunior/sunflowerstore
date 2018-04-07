@@ -20,10 +20,10 @@ public class Supplier implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long codigo;
+	private long code;
 
-	@NotBlank(message = "O nome do supplier é obrigatório")
-	private String nome;
+	@NotBlank(message = "O name do supplier é obrigatório")
+	private String name;
 
 	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;
@@ -32,27 +32,27 @@ public class Supplier implements Serializable {
 		super();
 	}
 
-	public Supplier(long codigo, String nome, List<Product> products) {
+	public Supplier(long code, String name, List<Product> products) {
 		super();
-		this.codigo = codigo;
-		this.nome = nome;
+		this.code = code;
+		this.name = name;
 		this.products = products;
 	}
 
-	public long getCodigo() {
-		return codigo;
+	public long getCode() {
+		return code;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setCode(long code) {
+		this.code = code;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -64,11 +64,11 @@ public class Supplier implements Serializable {
 
 		Supplier that = (Supplier) o;
 
-		return codigo == that.codigo;
+		return code == that.code;
 	}
 
 	@Override
 	public int hashCode() {
-		return (int) (codigo ^ (codigo >>> 32));
+		return (int) (code ^ (code >>> 32));
 	}
 }
