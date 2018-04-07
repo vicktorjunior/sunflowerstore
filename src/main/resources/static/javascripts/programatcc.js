@@ -81,15 +81,7 @@
     
     
     $("#desconto, #qtdSelling, #selectProd").change(function () {
-        var qtdSelling = parseInt($('#qtdSelling').val());
-        var sellingPrice = parseFloat($('#pVenda').val());
-        var productName = $('#products :selected').text();
-        var discount = ((parseFloat($('#desconto').val())*sellingPrice)/parseInt(100))*qtdSelling;
-        var sellingTotal = (qtdSelling*sellingPrice)-discount;
 
-        console.log($('#pVenda').val());
-
-        $("#totProd").val(sellingTotal.toFixed(2));
     });
 
 
@@ -108,7 +100,7 @@
     });
 
 $(document).ready(function() {
-    $("#selectProd").change(function(e) {
+    $("#desconto, #qtdSelling, #selectProd").change(function(e) {
         var product = $('#selectProd').val();
         $.ajax({
             type:'GET',
@@ -120,8 +112,20 @@ $(document).ready(function() {
                 //var product = result.precoVenda;
 
                 $("#pVenda").val(result);
+                var qtdSelling = parseInt($('#qtdSelling').val());
+                var sellingPrice = parseFloat($('#pVenda').val());
+                var productName = $('#products :selected').text();
+                var discount = ((parseFloat($('#desconto').val())*sellingPrice)/parseInt(100))*qtdSelling;
+                var sellingTotal = (qtdSelling*sellingPrice)-discount;
+
+                console.log(sellingPrice.toString());
+                console.log($('#qtdSelling').val());
+                console.log($('#pVenda').val());
+
+                $("#totProd").val(sellingTotal.toFixed(2));
             }
         });
+
     })
 });
 
