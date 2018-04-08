@@ -11,15 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/sell/")
@@ -46,10 +45,23 @@ public class SellController {
     }
 
 	@RequestMapping("new")
-    public ModelAndView newSell(ItemSell itemSell) {
+    public ModelAndView newSell(ItemSell itemSell, Model model) {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
-        Sell sell = new Sell();
+        Sell sell;
+        if(model.asMap().get("items") != null) {
+            System.out.println("if");
+           sell = (Sell) model.asMap().get("sell");
+        } else {
+            System.out.println("else");
+            sell = new Sell();
+        }
+        List<ItemSell> itemSells = new ArrayList<ItemSell>();
+
+        itemSells.add(new ItemSell(1, new BigDecimal("0") , productService.get(1L),sell));
+
+        sell.setItems(itemSells);
+
 
 
 
@@ -66,25 +78,49 @@ public class SellController {
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView add(@Valid ItemSell itemSell, BindingResult result,
-                   RedirectAttributes redirectAttributes, Model model) {
+                   RedirectAttributes redirectAttributes, Model model, @ModelAttribute("sell") Sell sell) {
         if (result.hasErrors()) {
             System.out.println("errou!");
           //  return newProduct(itemSell);
         }
 
-        itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
+        try {
+            itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
+            sell.getItems().add(itemSell);
 
-            sellService.add(itemSell);
+            sellService.add(sell,itemSell);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+
+        redirectAttributes.addAttribute("sell", sell);
+        redirectAttributes.addAttribute("items", sell.getItems());
         ModelAndView mv =  new ModelAndView("redirect:/sell/new");
 
         return mv;
 
-        //Product product = productService.get();
-        //sellService.add(product, sell);
-
-        //System.out.println(sell.toString());
     }
+
+    /*@PostMapping("save")
+    public ModelAndView save(@ModelAttribute("question") Question question, BindingResult bindingResult,
+                             RedirectAttributes redirectAttr, @AuthenticationPrincipal UserImpl activeUser, Errors errors, Model model) {
+        if (bindingResult.hasErrors()) {
+            redirectAttr.addFlashAttribute(errors);
+            return new ModelAndView("/question/list");
+        }
+        if (question.getAlternatives().size() == 0)
+            question.setAlternatives(new LinkedList<>());
+
+        if (question.getCorrect() != null && !question.getCorrect().isEmpty()) {
+            question.getAlternatives().get(Integer.parseInt(question.getCorrect())).setCorrect(true);
+        }
+        questionService.save(question);
+        return new ModelAndView("redirect:/question/list");
+    }*/
+
+
+
 
 
     @RequestMapping(value = "changeValue", method = RequestMethod.POST)

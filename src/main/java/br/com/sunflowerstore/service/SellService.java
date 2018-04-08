@@ -15,9 +15,9 @@ public class SellService {
         this.sellRepository = sellRepository;
     }
 
-    public void add(ItemSell itemSell) {
+    public void add(Sell sell, ItemSell itemSell) {
         if(itemSell.getSell()!= null) {
-            itemSell.setSell(new Sell());
+            itemSell.setSell(sell);
         } else {
             //itemSell.setSell(itemSell.getSell().addProduct());
         }

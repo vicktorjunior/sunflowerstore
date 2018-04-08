@@ -20,6 +20,9 @@ public class Sell {
 
     private LocalDateTime time;
 
+    public Sell() {
+    }
+
     public long getCode() {
         return code;
     }
