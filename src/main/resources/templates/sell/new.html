@@ -37,21 +37,19 @@
                         <th scope="col">Qtd</th>
                         <th scope="col">Product</th>
                         <th scope="col">Unit Value</th>
-                        <th scope="col">Discount</th>
                         <th scope="col">Total</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tbody>
-                    <tr th:each="itemSell, rowStat : ${items}"	th:class="${rowStat.even ? 'even' : 'odd'}">
-                        <td><input type="text" th:field="*{items[__${rowStat.index}__].id}" readonly="readonly" /></td>
-                        <td><input type="text" th:field="*{items[__${rowStat.index}__].qtd}" /></td>
-                        <td><input type="text" th:field="*{items[__${rowStat.index}__].product.name}" /></td>
+                    <span th:if="${#lists.isEmpty(items)}"
+                          th:text="#{product.listisempty}"> </span> <!-- TODO: RNG009 MSG006-->
+                    <tbody th:if="!${#lists.isEmpty(items)}">
+                    <tr th:each="itemSell, rowStat : ${sell.items}"	th:class="${rowStat.even ? 'even' : 'odd'}" >
+                        <td th:text="*{items[__${rowStat.index}__].getQtd()}"></td>
+                        <td th:text="*{items[__${rowStat.index}__].getProduct().getName()}"></td>
+                        <td th:text="*{items[__${rowStat.index}__].getProduct().getSellingPrice()}"></td>
                         <td><a th:href="@{/sell/new/} + *{items[__${rowStat.index}__].id} +  '/'">Delete</a></td>
                     </tr>
-                    </tbody>
-
                     </tbody>
                 </table>
             </div>

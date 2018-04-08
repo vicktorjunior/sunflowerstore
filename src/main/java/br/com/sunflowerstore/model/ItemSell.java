@@ -21,7 +21,14 @@ public class ItemSell {
     private Sell sell;
 
     public ItemSell() {
-        product = new Product();
+
+    }
+
+    public ItemSell(Integer qtd, BigDecimal discount, Product product, Sell sell) {
+        this.qtd = qtd;
+        this.discount = discount;
+        this.product = product;
+        this.sell = sell;
     }
 
     public Long getId() {
