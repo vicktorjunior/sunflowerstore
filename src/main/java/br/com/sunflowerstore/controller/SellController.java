@@ -49,9 +49,9 @@ public class SellController {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
         Sell sell;
-        if(sell.getItems().isEmpty()) {
+        if(model.asMap().get("sell") != null) {
             System.out.println("if");
-           sell = (Sell) model.asMap().get("sell");
+            sell = (Sell) model.asMap().get("sell");
         } else {
             System.out.println("else");
             sell = new Sell();
@@ -95,6 +95,7 @@ public class SellController {
 
 
         redirectAttributes.addAttribute("sell", sell);
+        model.addAttribute("items",sell.getItems());
         //redirectAttributes.addAttribute("items", sell.getItems());
         ModelAndView mv =  new ModelAndView("redirect:/sell/new");
 
