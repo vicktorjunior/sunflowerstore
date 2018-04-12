@@ -44,7 +44,7 @@
                     <span th:if="${#lists.isEmpty(items)}"
                           th:text="#{product.listisempty}"> </span> <!-- TODO: RNG009 MSG006-->
                     <tbody th:if="!${#lists.isEmpty(items)}">
-                    <tr th:each="itemSell, rowStat : ${items}"	th:class="${rowStat.even ? 'even' : 'odd'}" >
+                    <tr th:each="itemSell, rowStat : ${sell.items}"	th:class="${rowStat.even ? 'even' : 'odd'}" >
                         <td th:text="*{items[__${rowStat.index}__].getQtd()}"></td>
                         <td th:text="*{items[__${rowStat.index}__].getProduct().getName()}"></td>
                         <td th:text="*{items[__${rowStat.index}__].getProduct().getSellingPrice()}"></td>
