@@ -77,25 +77,22 @@ public class SellController {
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView add(@Valid ItemSell itemSell, BindingResult result,
+    public ModelAndView add(@Valid @ModelAttribute("itemSell") ItemSell itemSell, BindingResult result,
                    RedirectAttributes redirectAttributes, Model model, @ModelAttribute("sell") Sell sell) {
         if (result.hasErrors()) {
             System.out.println("errou!");
           //  return newProduct(itemSell);
         }
 
-        try {
-            itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
-            sell.getItems().add(itemSell);
+        itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
+        sell.getItems().add(itemSell);
 
-            sellService.add(sell,itemSell);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        sellService.add(sell,itemSell);
+
 
 
         redirectAttributes.addAttribute("sell", sell);
-        model.addAttribute("items",sell.getItems());
+        model.addAttribute("items", sell.getItems());
         //redirectAttributes.addAttribute("items", sell.getItems());
         ModelAndView mv =  new ModelAndView("redirect:/sell/new");
 

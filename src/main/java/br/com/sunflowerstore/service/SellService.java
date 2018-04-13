@@ -16,14 +16,14 @@ public class SellService {
     }
 
     public void add(Sell sell, ItemSell itemSell) {
-        if(itemSell.getSell()!= null) {
+        //if(itemSell.getSell()!= null) {
             itemSell.setSell(sell);
-        } else {
+        //} else {
             //itemSell.setSell(itemSell.getSell().addProduct());
-        }
+        //}
         //String nomeProduct = itemSell.getProduct().getName();
 
-        //sell.addProduct(itemSell);
+        sell.addProduct(itemSell);
         //System.out.println(sell.getItems().toString());
     }
 
