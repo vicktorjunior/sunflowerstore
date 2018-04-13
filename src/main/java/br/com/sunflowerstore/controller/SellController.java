@@ -45,14 +45,16 @@ public class SellController {
     }
 
 	@RequestMapping("new")
-    public ModelAndView newSell(ItemSell itemSell, Model model) {
+    public ModelAndView newSell(@ModelAttribute("itemSell") ItemSell itemSell, Model model) {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
         Sell sell;
+
         if(model.asMap().get("sell") != null) {
             System.out.println("if");
             sell = (Sell) model.asMap().get("sell");
         } else {
+            //System.out.println(model.asMap().get("sell").toString());
             System.out.println("else");
             sell = new Sell();
         }
@@ -62,7 +64,7 @@ public class SellController {
 
         sell.setItems(itemSells);
 
-
+        System.out.println(sell.toString());
 
 
         ModelAndView mv = new ModelAndView("sell/new");
@@ -89,7 +91,7 @@ public class SellController {
 
         sellService.add(sell,itemSell);
 
-
+        System.out.println(sell.getItems().toString());
 
         redirectAttributes.addAttribute("sell", sell);
         model.addAttribute("items", sell.getItems());
