@@ -17,8 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/sell/")
@@ -45,12 +43,12 @@ public class SellController {
     }
 
 	@RequestMapping("new")
-    public ModelAndView newSell(@ModelAttribute("itemSell") ItemSell itemSell, Model model) {
+    public ModelAndView newSell(@ModelAttribute("itemSell") ItemSell itemSell, Model model, Sell sell, RedirectAttributes redirectAttributes) {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
-        Sell sell;
 
-        if(model.asMap().get("sell") != null) {
+
+        if(model.asMap().get("items") != null) {
             System.out.println("if");
             sell = (Sell) model.asMap().get("sell");
         } else {
@@ -58,11 +56,11 @@ public class SellController {
             System.out.println("else");
             sell = new Sell();
         }
-        List<ItemSell> itemSells = new ArrayList<ItemSell>();
+        /*List<ItemSell> itemSells = new ArrayList<ItemSell>();
 
         itemSells.add(new ItemSell(1, new BigDecimal("0") , productService.get(1L),sell));
 
-        sell.setItems(itemSells);
+        sell.setItems(itemSells);*/
 
         System.out.println(sell.toString());
 
@@ -94,7 +92,7 @@ public class SellController {
         System.out.println(sell.getItems().toString());
 
         redirectAttributes.addAttribute("sell", sell);
-        model.addAttribute("items", sell.getItems());
+        redirectAttributes.addAttribute("items", sell.getItems());
         //redirectAttributes.addAttribute("items", sell.getItems());
         ModelAndView mv =  new ModelAndView("redirect:/sell/new");
 

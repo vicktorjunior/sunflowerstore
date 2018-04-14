@@ -45,10 +45,10 @@
                           th:text="#{product.listisempty}"> </span> <!-- TODO: RNG009 MSG006-->
                     <tbody th:if="!${#lists.isEmpty(items)}">
                     <tr th:each="itemSell, rowStat : ${sell.items}"	th:class="${rowStat.even ? 'even' : 'odd'}" >
-                        <td th:text="*{items[__${rowStat.index}__].getQtd()}"></td>
-                        <td th:text="*{items[__${rowStat.index}__].getProduct().getName()}"></td>
-                        <td th:text="*{items[__${rowStat.index}__].getProduct().getSellingPrice()}"></td>
-                        <td><a th:href="@{/sell/new/} + *{items[__${rowStat.index}__].id} +  '/'">Delete</a></td>
+                        <td th:text="${rowStat.index}"></td>
+                        <td th:text="${rowStat.index}"></td>
+                        <td th:text="${rowStat.index}"></td>
+                        <!--<td><a th:href="@{/sell/new/} + *{itemSell[__${rowStat.index}__].id} +  '/'">Delete</a></td>-->
                     </tr>
                     </tbody>
                 </table>
