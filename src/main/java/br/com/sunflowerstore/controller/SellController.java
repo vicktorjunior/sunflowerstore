@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/sell/")
@@ -43,30 +45,24 @@ public class SellController {
     }
 
 	@RequestMapping("new")
-    public ModelAndView newSell(@ModelAttribute("itemSell") ItemSell itemSell, Model model, Sell sell, RedirectAttributes redirectAttributes) {
+    public ModelAndView newSell(@ModelAttribute("itemSell") ItemSell itemSell, Model model,
+                                RedirectAttributes redirectAttributes, @ModelAttribute("sell") Sell sell) {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
 
-
-        if(model.asMap().get("items") != null) {
+        if(redirectAttributes.getFlashAttributes().get("sell") != null) {
             System.out.println("if");
-            sell = (Sell) model.asMap().get("sell");
+            sell = (Sell) redirectAttributes.getFlashAttributes().get("sell");
         } else {
             //System.out.println(model.asMap().get("sell").toString());
             System.out.println("else");
             sell = new Sell();
         }
-        /*List<ItemSell> itemSells = new ArrayList<ItemSell>();
-
+        List<ItemSell> itemSells = new ArrayList<ItemSell>();
         itemSells.add(new ItemSell(1, new BigDecimal("0") , productService.get(1L),sell));
 
-        sell.setItems(itemSells);*/
-
-        System.out.println(sell.toString());
-
-
-        ModelAndView mv = new ModelAndView("sell/new");
-
+        sell.setItems(itemSells);
+        ModelAndView mv = new ModelAndView("/sell/new");
 
         mv.addObject("produtos", productService.listInStock());
         mv.addObject("itemSell",new ItemSell());
@@ -79,22 +75,17 @@ public class SellController {
     @ResponseBody
     public ModelAndView add(@Valid @ModelAttribute("itemSell") ItemSell itemSell, BindingResult result,
                    RedirectAttributes redirectAttributes, Model model, @ModelAttribute("sell") Sell sell) {
-        if (result.hasErrors()) {
-            System.out.println("errou!");
-          //  return newProduct(itemSell);
-        }
 
         itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
         sell.getItems().add(itemSell);
 
         sellService.add(sell,itemSell);
 
-        System.out.println(sell.getItems().toString());
-
-        redirectAttributes.addAttribute("sell", sell);
-        redirectAttributes.addAttribute("items", sell.getItems());
-        //redirectAttributes.addAttribute("items", sell.getItems());
         ModelAndView mv =  new ModelAndView("redirect:/sell/new");
+
+        redirectAttributes.addFlashAttribute("sell", sell);
+        redirectAttributes.addFlashAttribute("items", sell.getItems());
+        //redirectAttributes.addAttribute("items", sell.getItems());
 
         return mv;
 

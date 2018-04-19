@@ -23,7 +23,7 @@ public class SellService {
         //}
         //String nomeProduct = itemSell.getProduct().getName();
 
-        sell.addProduct(itemSell);
+        //sell.addProduct(itemSell);
         //System.out.println(sell.getItems().toString());
     }
 
