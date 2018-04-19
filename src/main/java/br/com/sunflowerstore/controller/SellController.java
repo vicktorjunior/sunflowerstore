@@ -72,8 +72,7 @@ public class SellController {
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
-    @ResponseBody
-    public ModelAndView add(@Valid @ModelAttribute("itemSell") ItemSell itemSell, BindingResult result,
+    public String add(@Valid @ModelAttribute("itemSell") ItemSell itemSell, BindingResult result,
                    RedirectAttributes redirectAttributes, Model model, @ModelAttribute("sell") Sell sell) {
 
         itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
@@ -81,13 +80,13 @@ public class SellController {
 
         sellService.add(sell,itemSell);
 
-        ModelAndView mv =  new ModelAndView("redirect:/sell/new");
+        //ModelAndView mv =  new ModelAndView("");
 
         redirectAttributes.addFlashAttribute("sell", sell);
         redirectAttributes.addFlashAttribute("items", sell.getItems());
         //redirectAttributes.addAttribute("items", sell.getItems());
 
-        return mv;
+        return "redirect:/sell/new";
 
     }
 
