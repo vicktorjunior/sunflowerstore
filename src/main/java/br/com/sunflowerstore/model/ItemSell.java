@@ -21,7 +21,11 @@ public class ItemSell {
     private Sell sell;
 
     public ItemSell() {
+    }
 
+
+    public ItemSell(Integer qtd) {
+        this.qtd = qtd;
     }
 
     public ItemSell(Integer qtd, BigDecimal discount, Product product, Sell sell) {

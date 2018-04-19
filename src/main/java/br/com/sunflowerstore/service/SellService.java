@@ -2,29 +2,44 @@ package br.com.sunflowerstore.service;
 
 import br.com.sunflowerstore.model.ItemSell;
 import br.com.sunflowerstore.model.Sell;
+import br.com.sunflowerstore.repository.ItemSellRepository;
 import br.com.sunflowerstore.repository.SellRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SellService {
 
     private final SellRepository sellRepository;
+    private final ItemSellRepository itemSellRepository;
 
 
-    public SellService(SellRepository sellRepository) {
+    public SellService(SellRepository sellRepository, ItemSellRepository itemSellRepository) {
         this.sellRepository = sellRepository;
+        this.itemSellRepository = itemSellRepository;
     }
 
-    public void add(Sell sell, ItemSell itemSell) {
-        //if(itemSell.getSell()!= null) {
-            itemSell.setSell(sell);
-        //} else {
-            //itemSell.setSell(itemSell.getSell().addProduct());
-        //}
-        //String nomeProduct = itemSell.getProduct().getName();
+    public Sell getOne(Long id){
+        return sellRepository.findOne(id);
+    }
 
-        //sell.addProduct(itemSell);
-        //System.out.println(sell.getItems().toString());
+    public List<Sell> getAll(){
+        return sellRepository.findAll();
+    }
+
+    public Sell save(Sell sell){
+        return sellRepository.save(sell);
+    }
+
+    public List<ItemSell> add(Sell sell, ItemSell itemSell) {
+        sell.getItems().add(itemSell);
+        itemSell.setSell(sell);
+        itemSellRepository.save(itemSell);
+
+        System.out.println(sell.getItems().toString());
+
+        return sell.getItems();
     }
 
 }

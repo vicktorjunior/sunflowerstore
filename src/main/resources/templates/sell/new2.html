@@ -46,9 +46,9 @@
                     <tbody th:if="!${#lists.isEmpty(items)}">
                     <tr th:each="iSell2, rowStat : ${items}"	th:class="${rowStat.even ? 'even' : 'odd'}" >
                         <td th:text="${items[__${rowStat.index}__].qtd}"></td>
-<!--                        <td th:text="${items[__${rowStat.index}__].product.name}"></td>
-                        <td th:text="${items[__${rowStat.index}__].product.sellingPrice}"></td>
-                        <td th:text="${items[__${rowStat.index}__].product.category}"></td>-->
+                        <td th:text="${items[__${rowStat.index}__].product.name}"></td>
+                        <!--     <td th:text="${items[__${rowStat.index}__].product.sellingPrice}"></td>
+                          <td th:text="${items[__${rowStat.index}__].product.category}"></td>-->
                         <!--<td><a th:href="@{/sell/new/} + *{itemSell[__${rowStat.index}__].id} +  '/'">Delete</a></td>-->
                     </tr>
                     </tbody>
@@ -71,9 +71,10 @@
 
             </div>
 
-        <form method="POST" th:object="${itemSell}" class="form-vertical js-form-loading" th:action="@{/sell/add}" id="formItem">
+        <form method="POST" th:object="${item}" class="form-vertical js-form-loading" id="formItem" th:action="@{/sell/add2}">
 
-            <input type="text" th:field="*{sell.code}" th:value="${sell.code}">
+            <input type="text" th:field="*{sell}" th:value="${sell}">
+
             <div class="row">
                 <div class="col-sm-1 form-group">
                     <label for="qtdSelling" class="control-label" th:text="#{selling.qtd}"></label>
@@ -83,7 +84,7 @@
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.name}"></label>
                     <div class="pt-field-action">
-                        <select id="selectProd" class="form-control" th:field="*{product.code}" >
+                        <select id="selectProd" class="form-control" th:field="*{product.code}">
                             <!--<input type="hidden" th:id="itemSellList[__${stat.index}__].product.code" th:name="itemSellList[__${stat.index}__].product.code"/>-->
                             <option value="" th:text="#{product.list}"></option>
                             <option th:each="prod:${produtos}" th:value="${prod.code}" th:text="${prod.name}"></option>
@@ -101,7 +102,7 @@
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{product.list.discount}"></label>
                     <div class="input-group">
-                        <input type="number" id="discount" class="form-control" th:field="*{discount}" value="0" min="0">
+                        <input type="number" id="discount" class="form-control" value="0" min="0">
                         <span class="input-group-addon" id="basic-addon2">%</span>
                     </div>
                 </div>

@@ -44,20 +44,63 @@ public class SellController {
         }
     }
 
+    @RequestMapping("new2")
+    public ModelAndView newSell2(Model model, @ModelAttribute("sell2") Sell sell) {
+        //sell = new Sell();
+        if(sell.getCode()==0L) {
+            sell = sellService.save(sell);
+            Long code = sell.getCode();
+            System.out.println(code);
+        }
+
+        ItemSell item = new ItemSell();
+        item.setSell(sell);
+
+        List<ItemSell> itemSells = new ArrayList<ItemSell>();
+        itemSells.add(new ItemSell(3,new BigDecimal(10),productService.get(1L),sell));
+
+        ModelAndView mv = new ModelAndView("sell/new2");
+        mv.addObject("produtos", productService.listInStock());
+        mv.addObject("items",itemSells);
+        mv.addObject("item",item);
+
+        return mv;
+    }
+
+
+    @RequestMapping(value = "add2",method = RequestMethod.POST)
+    public ModelAndView add2(@ModelAttribute("item") ItemSell item) {
+        System.out.println(item.getSell().getCode());
+        System.out.println(item.getQtd());
+        sellService.add(item.getSell(),item);
+
+        ModelAndView mv = new ModelAndView("redirect:/sell/new2");
+        mv.addObject("sell2",item.getSell());
+
+        return mv;
+    }
+
+
+
 	@RequestMapping("new")
     public ModelAndView newSell(@ModelAttribute("itemSell") ItemSell itemSell, Model model,
                                 RedirectAttributes redirectAttributes, @ModelAttribute("sell") Sell sell) {
         /*List<ItemSell> items = new ArrayList<>();
         items.add(new ItemSell());*/
 
-        if(redirectAttributes.getFlashAttributes().get("sell") != null) {
-            System.out.println("if");
-            sell = (Sell) redirectAttributes.getFlashAttributes().get("sell");
+//        if(redirectAttributes.getFlashAttributes().get("sell") != null) {
+//            System.out.println("if");
+//            sell = (Sell) redirectAttributes.getFlashAttributes().get("sell");
+//        } else {
+
+        if (sellService.getOne(1000002L) != null) {
+            sell = sellService.getOne(1L);
         } else {
             //System.out.println(model.asMap().get("sell").toString());
             System.out.println("else");
             sell = new Sell();
-        }
+            sell = sellService.save(sell);
+         }
         List<ItemSell> itemSells = new ArrayList<ItemSell>();
         itemSells.add(new ItemSell(1, new BigDecimal("0") , productService.get(1L),sell));
 
@@ -72,24 +115,26 @@ public class SellController {
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView add(@Valid @ModelAttribute("itemSell") ItemSell itemSell, BindingResult result,
-                   RedirectAttributes redirectAttributes, Model model, @ModelAttribute("sell") Sell sell) {
+                   RedirectAttributes redirectAttributes, Model model) {
 
+        Sell sell = sellService.getOne(itemSell.getSell().getCode());
         itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
+        if (sell.getItems() == null)
+            sell.setItems(new ArrayList<>());
         sell.getItems().add(itemSell);
 
         sellService.add(sell,itemSell);
 
         ModelAndView mv =  new ModelAndView("redirect:/sell/new");
-
-        redirectAttributes.addFlashAttribute("sell", sell);
-        redirectAttributes.addFlashAttribute("items", sell.getItems());
-        //redirectAttributes.addAttribute("items", sell.getItems());
-
+        mv.addObject("sell", sell);
+        mv.addObject("items", sell.getItems());
         return mv;
 
     }
+
+
+
 
     /*@PostMapping("save")
     public ModelAndView save(@ModelAttribute("question") Question question, BindingResult bindingResult,
