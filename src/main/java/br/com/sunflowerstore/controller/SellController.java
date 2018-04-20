@@ -10,12 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,83 +90,6 @@ public class SellController {
         return new ModelAndView("sell/new2");
 
     }
-
-
-
-	@RequestMapping("new")
-    public ModelAndView newSell(@ModelAttribute("itemSell") ItemSell itemSell, Model model,
-                                RedirectAttributes redirectAttributes, @ModelAttribute("sell") Sell sell) {
-        /*List<ItemSell> items = new ArrayList<>();
-        items.add(new ItemSell());*/
-
-//        if(redirectAttributes.getFlashAttributes().get("sell") != null) {
-//            System.out.println("if");
-//            sell = (Sell) redirectAttributes.getFlashAttributes().get("sell");
-//        } else {
-
-        if (sellService.getOne(1000002L) != null) {
-            sell = sellService.getOne(1L);
-        } else {
-            //System.out.println(model.asMap().get("sell").toString());
-            System.out.println("else");
-            sell = new Sell();
-            sell = sellService.save(sell);
-         }
-        List<ItemSell> itemSells = new ArrayList<ItemSell>();
-        itemSells.add(new ItemSell(1, new BigDecimal("0") , productService.get(1L),sell));
-
-        sell.setItems(itemSells);
-        ModelAndView mv = new ModelAndView("/sell/new");
-
-        mv.addObject("produtos", productService.listInStock());
-        mv.addObject("itemSell",new ItemSell());
-        mv.addObject("sell", sell);
-        mv.addObject("items",sell.getItems());
-        return mv;
-    }
-
-    @RequestMapping(value = "add",method = RequestMethod.POST)
-    public ModelAndView add(@Valid @ModelAttribute("itemSell") ItemSell itemSell, BindingResult result,
-                   RedirectAttributes redirectAttributes, Model model) {
-
-        Sell sell = sellService.getOne(itemSell.getSell().getCode());
-        itemSell.setProduct(productService.get(itemSell.getProduct().getCode()));
-        if (sell.getItems() == null)
-            sell.setItems(new ArrayList<>());
-        sell.getItems().add(itemSell);
-
-        sellService.add(sell,itemSell);
-
-        ModelAndView mv =  new ModelAndView("redirect:/sell/new");
-        mv.addObject("sell", sell);
-        mv.addObject("items", sell.getItems());
-        return mv;
-
-    }
-
-
-
-
-    /*@PostMapping("save")
-    public ModelAndView save(@ModelAttribute("question") Question question, BindingResult bindingResult,
-                             RedirectAttributes redirectAttr, @AuthenticationPrincipal UserImpl activeUser, Errors errors, Model model) {
-        if (bindingResult.hasErrors()) {
-            redirectAttr.addFlashAttribute(errors);
-            return new ModelAndView("/question/list");
-        }
-        if (question.getAlternatives().size() == 0)
-            question.setAlternatives(new LinkedList<>());
-
-        if (question.getCorrect() != null && !question.getCorrect().isEmpty()) {
-            question.getAlternatives().get(Integer.parseInt(question.getCorrect())).setCorrect(true);
-        }
-        questionService.save(question);
-        return new ModelAndView("redirect:/question/list");
-    }*/
-
-
-
-
 
     @RequestMapping(value = "changeValue", method = RequestMethod.POST)
     @ResponseBody

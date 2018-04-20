@@ -49,7 +49,7 @@
                         <td th:text="${items[__${rowStat.index}__].product.name}"></td>
                         <td th:text="${items[__${rowStat.index}__].product.sellingPrice}"></td>
                         <td th:text="${items[__${rowStat.index}__].total}"></td>
-                        <!--<td><a th:href="@{/sell/new/} + *{itemSell[__${rowStat.index}__].id} +  '/'">Delete</a></td>-->
+                        <td><a th:href="@{/sell/new/} + *{itemSell[__${rowStat.index}__].id} +  '/'">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
