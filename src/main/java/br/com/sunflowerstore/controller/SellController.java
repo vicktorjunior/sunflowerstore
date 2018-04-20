@@ -57,7 +57,6 @@ public class SellController {
         item.setSell(sell);
 
         List<ItemSell> itemSells = new ArrayList<ItemSell>();
-        itemSells.add(new ItemSell(3,new BigDecimal(10),productService.get(1L),sell));
 
         ModelAndView mv = new ModelAndView("sell/new2");
         mv.addObject("produtos", productService.listInStock());
@@ -70,12 +69,11 @@ public class SellController {
 
     @RequestMapping(value = "add2",method = RequestMethod.POST)
     public String add2(@ModelAttribute("item") ItemSell item) {
-        System.out.println(item.getSell().getCode());
-        System.out.println(item.getQtd());
+        /*System.out.println(item.getSell().getCode());
+        System.out.println(item.getQtd());*/
         sellService.add(item.getSell(),item);
 
-        //ModelAndView mv = new ModelAndView();
-        //mv.addObject("sell2",item.getSell());
+
 
         return "redirect:/sell/new22/" + item.getSell().getCode();
     }

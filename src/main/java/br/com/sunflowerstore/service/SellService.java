@@ -6,6 +6,7 @@ import br.com.sunflowerstore.repository.ItemSellRepository;
 import br.com.sunflowerstore.repository.SellRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -33,6 +34,17 @@ public class SellService {
     }
 
     public Sell add(Sell sell, ItemSell itemSell) {
+
+
+
+        BigDecimal disc =
+                (itemSell.getDiscount().multiply(itemSell.getProduct().getSellingPrice())).
+                        divide(new BigDecimal(100),2).multiply(new BigDecimal(itemSell.getQtd()));
+
+        BigDecimal tot =  itemSell.getProduct().getSellingPrice().multiply(new BigDecimal(itemSell.getQtd())).subtract(disc);
+
+        itemSell.setTotal(tot);
+        System.out.println(itemSell.getTotal());
         sell.getItems().add(itemSell);
         itemSell.setSell(sell);
         itemSellRepository.save(itemSell);

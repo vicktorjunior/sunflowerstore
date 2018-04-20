@@ -14,6 +14,8 @@ public class ItemSell {
 
     private BigDecimal discount;
 
+    private BigDecimal total;
+
     @OneToOne
     private Product product;
 
@@ -21,11 +23,6 @@ public class ItemSell {
     private Sell sell;
 
     public ItemSell() {
-    }
-
-
-    public ItemSell(Integer qtd) {
-        this.qtd = qtd;
     }
 
     public ItemSell(Integer qtd, BigDecimal discount, Product product, Sell sell) {
@@ -57,6 +54,14 @@ public class ItemSell {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 
     @Transient
