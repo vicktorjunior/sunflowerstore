@@ -32,14 +32,14 @@ public class SellService {
         return sellRepository.save(sell);
     }
 
-    public List<ItemSell> add(Sell sell, ItemSell itemSell) {
+    public Sell add(Sell sell, ItemSell itemSell) {
         sell.getItems().add(itemSell);
         itemSell.setSell(sell);
         itemSellRepository.save(itemSell);
 
         System.out.println(sell.getItems().toString());
 
-        return sell.getItems();
+        return sell;
     }
 
 }

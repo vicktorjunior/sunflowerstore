@@ -69,15 +69,28 @@ public class SellController {
 
 
     @RequestMapping(value = "add2",method = RequestMethod.POST)
-    public ModelAndView add2(@ModelAttribute("item") ItemSell item) {
+    public String add2(@ModelAttribute("item") ItemSell item) {
         System.out.println(item.getSell().getCode());
         System.out.println(item.getQtd());
         sellService.add(item.getSell(),item);
 
-        ModelAndView mv = new ModelAndView("redirect:/sell/new2");
-        mv.addObject("sell2",item.getSell());
+        //ModelAndView mv = new ModelAndView();
+        //mv.addObject("sell2",item.getSell());
 
-        return mv;
+        return "redirect:/sell/new22/" + item.getSell().getCode();
+    }
+
+    @RequestMapping(value = "new22/{code}")
+    public ModelAndView new2(@PathVariable Long code, Model model) {
+
+        model.addAttribute("sell",sellService.getOne(code));
+        model.addAttribute("items",sellService.getOne(code).getItems());
+        model.addAttribute("item",new ItemSell());
+        model.addAttribute("produtos", productService.listInStock());
+
+
+        return new ModelAndView("sell/new2");
+
     }
 
 
