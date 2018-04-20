@@ -83,9 +83,12 @@ public class SellController {
     @RequestMapping(value = "new22/{code}")
     public ModelAndView new2(@PathVariable Long code, Model model) {
 
+        ItemSell item = new ItemSell();
+        item.setSell(sellService.getOne(code));
+
         model.addAttribute("sell",sellService.getOne(code));
         model.addAttribute("items",sellService.getOne(code).getItems());
-        model.addAttribute("item",new ItemSell());
+        model.addAttribute("item",item);
         model.addAttribute("produtos", productService.listInStock());
 
 
