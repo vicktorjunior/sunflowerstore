@@ -54,4 +54,9 @@ public class SellService {
         return sell;
     }
 
+    public void deleteItem(Sell sell, Long id) {
+        sell.getItems().remove(id);
+        itemSellRepository.delete(id);
+    }
+
 }
