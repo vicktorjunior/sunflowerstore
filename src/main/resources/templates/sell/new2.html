@@ -54,7 +54,7 @@
                         <td th:text="${items[__${rowStat.index}__].qtd}"></td>
                         <td th:text="${items[__${rowStat.index}__].product.name}"></td>
                         <td th:text="${items[__${rowStat.index}__].product.sellingPrice}"></td>
-                        <td th:text="${items[__${rowStat.index}__].total}"></td>
+                        <td th:text="${items[__${rowStat.index}__].total}" class="itemTot"></td>
                         <td><a th:href="@{|/sell/deleteItem/${items[__${rowStat.index}__].sell.getCode()}/${items[__${rowStat.index}__].getId()}|} +  '/'">Delete</a></td>
                     </tr>
                     </tbody>
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-sm-2 form-group">
                     <label for="product" class="control-label" th:text="#{selling.total}"></label>
-                    <label type="text" id="sellingTotal" class="form-control" disabled /> <!--th:field="*{sell.totalSell}"-->
+                    <input type="text" id="sellingTotal" class="form-control" disabled /> <!--th:field="*{sell.totalSell}"-->
                 </div>
 
             </div>
