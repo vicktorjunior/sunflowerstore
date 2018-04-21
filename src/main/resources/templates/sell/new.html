@@ -69,6 +69,10 @@
                     <input type="button" class="form-control btn btn-success" id="sumTotal" th:value="#{sum}" />
                 </div>
 
+                <div class="col-sm-2 form-group">
+                    <input type="button" class="form-control btn btn-danger" id="sumTotal" th:value="#{sell.cancel}" />
+                </div>
+
             </div>
 
         <form method="POST" th:object="${itemSell}" class="form-vertical js-form-loading" th:action="@{/sell/add}" id="formItem">
