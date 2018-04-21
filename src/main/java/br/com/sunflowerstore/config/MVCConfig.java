@@ -36,8 +36,9 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public LocaleResolver localeResolver() {
+		Locale ptBr = new Locale("pt", "BR");
 		SessionLocaleResolver slr = new SessionLocaleResolver();
-		slr.setDefaultLocale(Locale.US);
+		slr.setDefaultLocale(ptBr);
 		return slr;
 	}
 
