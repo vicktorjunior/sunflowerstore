@@ -76,6 +76,15 @@ public class SellController {
         return "redirect:/sell/new22/" + item.getSell().getCode();
     }
 
+    @RequestMapping(value = "total/{sell}/{total}", method = RequestMethod.GET, produces = {MimeTypeUtils.TEXT_PLAIN_VALUE})
+    public ResponseEntity<String> total(@PathVariable("total") BigDecimal total, @PathVariable("sell") Long sell) {
+        try {
+            return new ResponseEntity<String>("teste" ,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @RequestMapping(value = "new22/{code}")
     public ModelAndView new2(@PathVariable Long code, Model model) {
 

@@ -108,9 +108,7 @@ $(document).ready(function() {
             url: '/sell/demo1/'+ product,
             //contentType: 'application/json',
             success: function (result) {
-                /* var string = result.toString();
-                 var number = Double.parseDouble(string);*/
-                //var product = result.precoVenda;
+
 
                 $("#sprice").val(result);
                 var qtdSelling = parseInt($('#qtdSelling').val());
@@ -123,7 +121,7 @@ $(document).ready(function() {
             }
         });
 
-    })
+    });
 
 
     $(calculateSum);
@@ -143,6 +141,29 @@ $(document).ready(function() {
         });
         $('#sellingTotal').val(sum);
     };
+
+
+    var sell = $('#sell').val();
+    var total = $('#sellingTotal').val();
+    $.ajax({
+        type:'GET',
+        url: '/sell/total/'+ sell + '/' + total,
+        //contentType: 'application/json',
+        success: function (result) {
+
+
+            $("#sprice").val(result);
+            var qtdSelling = parseInt($('#qtdSelling').val());
+            var sellingPrice = parseFloat($('#sprice').val());
+            var productName = $('#selectProd :selected').text();
+            var discount = ((parseFloat($('#discount').val())*sellingPrice)/parseInt(100))*qtdSelling;
+            var sellingTotal = (qtdSelling*sellingPrice)-discount;
+
+            $("#totProd").val(sellingTotal.toFixed(2));
+        }
+    });
+
+
 
 
 });
