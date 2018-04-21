@@ -81,7 +81,7 @@ public class SellController {
 
         ItemSell item = new ItemSell();
         item.setSell(sellService.getOne(code));
-        System.out.println("id no new2+code =" + sellService.getOne(code).getItems().get(0).getId());
+       // System.out.println("id no new2+code =" + sellService.getOne(code).getItems().get(0).getId());
 
 
         model.addAttribute("sell",sellService.getOne(code));
@@ -97,7 +97,7 @@ public class SellController {
     @RequestMapping(value = "deleteItem/{code}/{id}",method = RequestMethod.GET)
     public String deleteItem(@PathVariable Long id, @PathVariable Long code, Model model) {
         sellService.deleteItem(sellService.getOne(code),id);
-        return "redirect:/sell/new22/" + sellService.getOne(id);
+        return "redirect:/sell/new22/" + sellService.getOne(code).getCode();
     }
 
     @RequestMapping(value = "changeValue", method = RequestMethod.POST)
