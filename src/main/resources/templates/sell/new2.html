@@ -31,8 +31,15 @@
 
 
             <div class="row">
-                <table class="table" id="productsToSell">
-                    <thead>
+
+                <table class="table" id="productsToSell" >
+                    <tr th:if="${#lists.isEmpty(items)}">
+                        <td>
+                            <span
+                          th:text="#{sell.listisempty}"></span>
+                        </td>
+                    </tr>
+                    <thead  th:if="!${#lists.isEmpty(items)}">
                     <tr>
                         <th scope="col">Qtd</th>
                         <th scope="col">Product</th>
@@ -41,9 +48,8 @@
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
-                    <span th:if="${#lists.isEmpty(items)}"
-                          th:text="#{product.listisempty}"> </span> <!-- TODO: RNG009 MSG006-->
-                    <tbody th:if="!${#lists.isEmpty(items)}">
+
+                    <tbody  th:if="!${#lists.isEmpty(items)}">
                     <tr th:each="iSell2, rowStat : ${items}"	th:class="${rowStat.even ? 'even' : 'odd'}" >
                         <td th:text="${items[__${rowStat.index}__].qtd}"></td>
                         <td th:text="${items[__${rowStat.index}__].product.name}"></td>
