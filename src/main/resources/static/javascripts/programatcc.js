@@ -124,7 +124,7 @@ $(document).ready(function() {
     });
 
 
-    $(calculateSum);
+    //$(calculateSum);
 
     function calculateSum() {
 
@@ -143,7 +143,7 @@ $(document).ready(function() {
     };
 
 
-    var sell = $('#sell').val();
+   /* var sell = $('#sell').val();
     var total = $('#sellingTotal').val();
     $.ajax({
         type:'GET',
@@ -161,7 +161,7 @@ $(document).ready(function() {
 
             $("#totProd").val(sellingTotal.toFixed(2));
         }
-    });
+    });*/
 
 
 

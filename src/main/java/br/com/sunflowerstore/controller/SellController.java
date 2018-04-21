@@ -56,6 +56,7 @@ public class SellController {
         List<ItemSell> itemSells = new ArrayList<ItemSell>();
 
         ModelAndView mv = new ModelAndView("sell/new2");
+        model.addAttribute("sell",sell);
         mv.addObject("produtos", productService.listInStock());
         mv.addObject("items",itemSells);
         mv.addObject("item",item);
@@ -79,6 +80,7 @@ public class SellController {
     @RequestMapping(value = "total/{sell}/{total}", method = RequestMethod.GET, produces = {MimeTypeUtils.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> total(@PathVariable("total") BigDecimal total, @PathVariable("sell") Long sell) {
         try {
+            sellService.getOne(sell);
             return new ResponseEntity<String>("teste" ,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

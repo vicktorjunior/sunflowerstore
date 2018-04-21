@@ -20,6 +20,8 @@ public class Sell {
 
     private LocalDateTime time;
 
+    private BigDecimal totalSell;
+
     public Sell() {
     }
 
@@ -51,14 +53,23 @@ public class Sell {
         items.add(item);
     }
 
-    @Transient
-    public BigDecimal getTotalSell(Integer id) {
+
+    public void sumTotal() {
         BigDecimal totalSell = new BigDecimal(0);
         for (ItemSell item : items) {
             int qtdInt = item.getQtd();
             BigDecimal qtdBD = new BigDecimal(qtdInt);
             totalSell.add(item.getUnitValue().multiply(qtdBD));
         }
+        this.totalSell=totalSell;
+    }
+
+    public BigDecimal getTotalSell() {
+        sumTotal();
         return totalSell;
+    }
+
+    public void setTotalSell(BigDecimal totalSell) {
+        this.totalSell = totalSell;
     }
 }
