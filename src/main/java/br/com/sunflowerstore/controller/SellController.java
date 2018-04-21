@@ -70,9 +70,6 @@ public class SellController {
         /*System.out.println(item.getSell().getCode());
         System.out.println(item.getQtd());*/
         sellService.add(item.getSell(),item);
-        System.out.println("id no add =" + item.getId());
-
-
 
         return "redirect:/sell/new22/" + item.getSell().getCode();
     }
@@ -92,14 +89,11 @@ public class SellController {
 
         ItemSell item = new ItemSell();
         item.setSell(sellService.getOne(code));
-       // System.out.println("id no new2+code =" + sellService.getOne(code).getItems().get(0).getId());
-
 
         model.addAttribute("sell",sellService.getOne(code));
         model.addAttribute("items",sellService.getOne(code).getItems());
         model.addAttribute("item",item);
         model.addAttribute("produtos", productService.listInStock());
-
 
         return new ModelAndView("sell/new2");
 

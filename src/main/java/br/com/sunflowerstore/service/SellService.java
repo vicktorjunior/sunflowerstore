@@ -35,8 +35,6 @@ public class SellService {
 
     public Sell add(Sell sell, ItemSell itemSell) {
 
-
-
         BigDecimal disc =
                 (itemSell.getDiscount().multiply(itemSell.getProduct().getSellingPrice())).
                         divide(new BigDecimal(100),2).multiply(new BigDecimal(itemSell.getQtd()));
@@ -44,12 +42,12 @@ public class SellService {
         BigDecimal tot =  itemSell.getProduct().getSellingPrice().multiply(new BigDecimal(itemSell.getQtd())).subtract(disc);
 
         itemSell.setTotal(tot);
-        System.out.println(itemSell.getTotal());
+        System.out.println("total do item no service = "+ itemSell.getTotal());
         sell.getItems().add(itemSell);
+        sell.setTotalSell(itemSell.getTotal());
+        System.out.println("total do SELL no service = " + sell.getTotalSell());
         itemSell.setSell(sell);
         itemSellRepository.save(itemSell);
-
-        System.out.println(sell.getItems().toString());
 
         return sell;
     }

@@ -9,8 +9,6 @@ import java.util.List;
 @Entity
 public class Sell {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // usa o autoincremento no código
     private long code; // TODO: RNG 003
@@ -59,7 +57,7 @@ public class Sell {
         for (ItemSell item : items) {
             int qtdInt = item.getQtd();
             BigDecimal qtdBD = new BigDecimal(qtdInt);
-            totalSell.add(item.getUnitValue().multiply(qtdBD));
+            totalSell = totalSell.add(item.getUnitValue().multiply(qtdBD));
         }
         this.totalSell=totalSell;
     }
