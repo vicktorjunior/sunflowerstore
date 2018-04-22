@@ -83,7 +83,7 @@
 
         <form method="POST" th:object="${item}" class="form-vertical js-form-loading" id="formItem" th:action="@{/sell/add2}">
 
-            <input type="text" id="sell" th:field="*{sell}" th:value="${sell}">
+            <input type="hidden" id="sell" th:field="*{sell}" th:value="${sell}">
 
             <div class="row">
                 <div class="col-sm-1 form-group">
