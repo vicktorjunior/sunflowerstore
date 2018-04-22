@@ -77,7 +77,7 @@ public class SellController {
     @RequestMapping(value = "total/{sell}/{total}", method = RequestMethod.GET, produces = {MimeTypeUtils.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> total(@PathVariable("total") BigDecimal total, @PathVariable("sell") Long sell) {
         try {
-            sellService.getOne(sell);
+            sellService.getOne(sell).setTotalSell(total);
             return new ResponseEntity<String>("teste" ,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

@@ -124,7 +124,7 @@ $(document).ready(function() {
     });
 
 
-    //$(calculateSum);
+    $(calculateSum);
 
     function calculateSum() {
 
@@ -140,10 +140,12 @@ $(document).ready(function() {
 
         });
         $('#sellingTotal').val(sum);
-    };
+    }
 
+});
 
-   /* var sell = $('#sell').val();
+$("#sumTotal").onclick(function () {
+    var sell = $('#sell').val();
     var total = $('#sellingTotal').val();
     $.ajax({
         type:'GET',
@@ -151,23 +153,9 @@ $(document).ready(function() {
         //contentType: 'application/json',
         success: function (result) {
 
-
-            $("#sprice").val(result);
-            var qtdSelling = parseInt($('#qtdSelling').val());
-            var sellingPrice = parseFloat($('#sprice').val());
-            var productName = $('#selectProd :selected').text();
-            var discount = ((parseFloat($('#discount').val())*sellingPrice)/parseInt(100))*qtdSelling;
-            var sellingTotal = (qtdSelling*sellingPrice)-discount;
-
-            $("#totProd").val(sellingTotal.toFixed(2));
         }
-    });*/
-
-
-
-
+    })
 });
-
 
 
 
