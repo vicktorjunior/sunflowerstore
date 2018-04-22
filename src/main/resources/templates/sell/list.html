@@ -17,8 +17,8 @@
 
                 <div class="col-xs-4">
                     <div class="aw-page-header-controls">
-                        <a class="btn btn-primary" th:href="@{/products/new}" >
-                            <i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm" th:text="#{home.products.new}"></span>
+                        <a class="btn btn-primary" th:href="@{/sell/new2}" >
+                            <i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm" th:text="#{home.sellings.new}"></span>
                         </a>
                     </div>
                 </div>
@@ -69,29 +69,22 @@
 
         </form>
 
-        <span th:if="${#lists.isEmpty(products)}"
+        <span th:if="${#lists.isEmpty(sells)}"
               th:text="#{product.listisempty}"> </span> <!-- TODO: RNG009 MSG006-->
         <div class="box-body table-responsive no-padding"
-             th:if="!${#lists.isEmpty(products)}">
+             th:if="!${#lists.isEmpty(sells)}">
             <table class="table table-hover cell-border" id="datatable">
                 <thead>
                 <tr>
-                    <th th:if="${action=='list'}"
-                        th:text="#{product.list.id}"></th>
+                    <th th:text="#{product.list.id}"></th>
                     <th th:text="#{product.list.name}"></th>
-                    <th th:text="#{product.list.supplier}"></th>
-                    <th th:text="#{product.list.buyingPrice}"></th>
                     <th th:text="#{product.list.options}"></th> <!--TODO: RNG001-->
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="product: ${products}">
-                    <td th:if="${action=='list'}"
-                        th:text="${product.getCodigo()}"></td>
-                    <td th:text="${product.getNome()}"></td>
-                    <td th:text="${product.getSupplier().getNome()}"></td>
-                    <td class="js-decimal" th:text="${product.getPrecoCompra()}"></td>
-
+                <tr th:each="sell: ${sells}">
+                    <td th:text="${sell.getCode()}"></td>
+                    <td th:text="${sell.getTotalSell()}"></td>
                     <!--<td th:text="${#dates.format(occurrence.dateInsert, 'dd/MM/yyyy')}"></td>-->
 
                     <td>
@@ -101,21 +94,19 @@
                            th:text="#{occurrence.modal.manage.occurrence.button}"
                            th:if="${action=='manage'}"></a>-->
 
-                        <a th:if="${action=='list'}"  class="btn btn-default" id="btn-edit"
-                           th:text="#{product.edit}" th:href="@{|edit/${product.code}|}" href="#">
+                        <a  class="btn btn-default" id="btn-edit"
+                           th:text="#{product.edit}"  href="#">
                         </a>
 
                         <a href="#"
 
                            class="btn btn-danger"
-                           th:text="#{product.delete}" id="btn-delete"
-                           th:if="${action=='list'}"
-                           th:href="@{|delete/${product.code}|}">
+                           th:text="#{product.delete}" id="btn-delete">
                         </a>
 
-                        <a th:if="${action=='list'}"
+                        <a
                                 class="btn btn-info" id="btn-view"
-                                th:text="#{product.view}" th:href="@{|view/${product.code}|}" href="#">
+                                th:text="#{product.view}" href="#">
                         </a>
 
                     </td>

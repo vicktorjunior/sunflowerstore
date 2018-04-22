@@ -112,5 +112,14 @@ public class SellController {
     }*/
 
 
+    @GetMapping("list")
+    public ModelAndView list(Model model) {
+        model.addAttribute("sells", sellService.getAll());
+        //model.addAttribute("action", "list");
+        //System.out.println("passou reto");
+        return new ModelAndView("sell/list");
+    };
+
+
 
 }
