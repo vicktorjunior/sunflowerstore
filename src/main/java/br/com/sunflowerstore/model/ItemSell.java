@@ -64,11 +64,7 @@ public class ItemSell {
         this.total = total;
     }
 
-    @Transient
-    public BigDecimal getUnitValue() {
 
-        return discount.multiply(product.getSellingPrice());
-    }
 
     @Override
     public String toString() {

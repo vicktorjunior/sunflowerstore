@@ -57,7 +57,7 @@ public class Sell {
         for (ItemSell item : items) {
             int qtdInt = item.getQtd();
             BigDecimal qtdBD = new BigDecimal(qtdInt);
-            totalSell = totalSell.add(item.getUnitValue().multiply(qtdBD));
+            totalSell = totalSell.add(item.getProduct().getSellingPrice().multiply(qtdBD));
         }
         this.totalSell=totalSell;
     }

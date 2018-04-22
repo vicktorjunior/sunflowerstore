@@ -105,11 +105,11 @@ public class SellController {
         return "redirect:/sell/new22/" + sellService.getOne(code).getCode();
     }
 
-    @RequestMapping(value = "changeValue", method = RequestMethod.POST)
+    /*@RequestMapping(value = "changeValue", method = RequestMethod.POST)
     @ResponseBody
     public BigDecimal changeValue(ItemSell itemSell) {
         return itemSell.getUnitValue();
-    }
+    }*/
 
 
 
