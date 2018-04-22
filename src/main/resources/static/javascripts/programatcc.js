@@ -144,7 +144,7 @@ $(document).ready(function() {
 
 });
 
-$("#sumTotal").onclick(function () {
+$("#sumTotal").click(function () {
     var sell = $('#sell').val();
     var total = $('#sellingTotal').val();
     $.ajax({
@@ -152,7 +152,7 @@ $("#sumTotal").onclick(function () {
         url: '/sell/total/'+ sell + '/' + total,
         //contentType: 'application/json',
         success: function (result) {
-
+            console.log(result.toString());
         }
     })
 });

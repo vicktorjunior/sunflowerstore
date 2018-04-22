@@ -42,10 +42,10 @@ public class SellService {
         BigDecimal tot =  itemSell.getProduct().getSellingPrice().multiply(new BigDecimal(itemSell.getQtd())).subtract(disc);
 
         itemSell.setTotal(tot);
-        System.out.println("total do item no service = "+ itemSell.getTotal());
+        //System.out.println("total do item no service = "+ itemSell.getTotal());
         sell.getItems().add(itemSell);
         sell.setTotalSell(itemSell.getTotal());
-        System.out.println("total do SELL no service = " + sell.getTotalSell());
+        //System.out.println("total do SELL no service = " + sell.getTotalSell());
         itemSell.setSell(sell);
         itemSellRepository.save(itemSell);
 

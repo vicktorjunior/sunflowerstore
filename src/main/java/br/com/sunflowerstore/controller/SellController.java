@@ -78,7 +78,7 @@ public class SellController {
     public ResponseEntity<String> total(@PathVariable("total") BigDecimal total, @PathVariable("sell") Long sell) {
         try {
             sellService.getOne(sell).setTotalSell(total);
-            return new ResponseEntity<String>("teste" ,HttpStatus.OK);
+            return new ResponseEntity<String>("redirect:/sell/new2" ,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
