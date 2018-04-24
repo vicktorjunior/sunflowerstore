@@ -152,7 +152,7 @@ $("#sumTotal").click(function () {
         url: '/sell/total/'+ sell + '/' + total,
         //contentType: 'application/json',
         success: function (result) {
-            location.href = "/sell/new2";
+            location.href = "/sell/list";
         }
     })
 });

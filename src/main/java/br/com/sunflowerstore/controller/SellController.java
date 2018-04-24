@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,11 @@ public class SellController {
     @RequestMapping(value = "total/{sell}/{total}", method = RequestMethod.GET, produces = {MimeTypeUtils.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> total(@PathVariable("total") BigDecimal total, @PathVariable("sell") Long sell) {
         try {
+            LocalDateTime localDateTime = LocalDateTime.now();
+            System.out.println(localDateTime);
+
             sellService.getOne(sell).setTotalSell(total);
+            sellService.getOne(sell).setTime(localDateTime);
             return new ResponseEntity<String>("/sell/new2" ,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -114,7 +119,9 @@ public class SellController {
 
     @GetMapping("list")
     public ModelAndView list(Model model) {
-        model.addAttribute("sells", sellService.getAll());
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+        model.addAttribute("sells", sellService.getByDate(localDateTime));
         //model.addAttribute("action", "list");
         //System.out.println("passou reto");
         return new ModelAndView("sell/list");
