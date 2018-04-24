@@ -7,6 +7,7 @@ import br.com.sunflowerstore.repository.SellRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,11 +30,17 @@ public class SellService {
         return sellRepository.findAll();
     }
 
+    public List<Sell> getByDate(LocalDate localDate){
+        return sellRepository.findAllByTime(localDate);
+    }
+
     public Sell save(Sell sell){
         return sellRepository.save(sell);
     }
 
     public Sell add(Sell sell, ItemSell itemSell) {
+
+        LocalDate date = LocalDate.now();
 
         BigDecimal disc =
                 (itemSell.getDiscount().multiply(itemSell.getProduct().getSellingPrice())).
@@ -45,6 +52,8 @@ public class SellService {
         //System.out.println("total do item no service = "+ itemSell.getTotal());
         sell.getItems().add(itemSell);
         sell.setTotalSell(itemSell.getTotal());
+        sell.setTime(date);
+        System.out.println(sell.getTime());
         //System.out.println("total do SELL no service = " + sell.getTotalSell());
         itemSell.setSell(sell);
         itemSellRepository.save(itemSell);

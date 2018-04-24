@@ -2,7 +2,7 @@ package br.com.sunflowerstore.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Sell {
     @OneToMany(mappedBy = "sell")
     private List<ItemSell> items = new ArrayList<ItemSell>();
 
-    private LocalDateTime time;
+    private LocalDate time;
 
     private BigDecimal totalSell;
 
@@ -31,11 +31,11 @@ public class Sell {
         this.code = code;
     }
 
-    public LocalDateTime getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalDate time) {
         this.time = time;
     }
 

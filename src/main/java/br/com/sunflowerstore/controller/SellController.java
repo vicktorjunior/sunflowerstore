@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +115,9 @@ public class SellController {
 
     @GetMapping("list")
     public ModelAndView list(Model model) {
-        model.addAttribute("sells", sellService.getAll());
+        LocalDate localDate = LocalDate.now();
+
+        model.addAttribute("sells", sellService.getByDate(localDate));
         //model.addAttribute("action", "list");
         //System.out.println("passou reto");
         return new ModelAndView("sell/list");

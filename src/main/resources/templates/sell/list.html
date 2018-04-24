@@ -43,21 +43,11 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label th:text="#{stock}"></label>
 
-                        <div class="form-inline">
-                            <input type="text" class="form-control  aw-form-control-inline-sm">
-                            <label class="aw-form-label-between" th:text="#{between}"></label>
-                            <input type="text" class="form-control  aw-form-control-inline-sm">
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="form-group">
-                <button class="btn  btn-primary" type="submit" onclick="AW.showLoadingComponent(); return false;" th:text="#{search}">
+                <button class="btn  btn-primary" type="submit" th:text="#{search}">
 
                 </button>
             </div>
@@ -71,14 +61,16 @@
             <table class="table table-hover cell-border" id="datatable">
                 <thead>
                 <tr>
-                    <th th:text="#{product.list.id}"></th>
-                    <th th:text="#{product.list.name}"></th>
+                    <th th:text="#{sell.code}"></th>
+                    <th th:text="#{selling.date}"></th>
+                    <th th:text="#{selling.total}"></th>
                     <th th:text="#{product.list.options}"></th> <!--TODO: RNG001-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="sell: ${sells}">
                     <td th:text="${sell.getCode()}"></td>
+                    <td th:text="${sell.getTime()}"></td>
                     <td th:text="${sell.getTotalSell()}"></td>
                     <!--<td th:text="${#dates.format(occurrence.dateInsert, 'dd/MM/yyyy')}"></td>-->
 
@@ -88,9 +80,9 @@
                            class="btn btn-default"
                            th:text="#{occurrence.modal.manage.occurrence.button}"
                            th:if="${action=='manage'}"></a>-->
-
-                        <a  class="btn btn-default" id="btn-edit"
-                           th:text="#{product.edit}"  href="#">
+                        <a
+                                class="btn btn-info" id="btn-view"
+                                th:text="#{product.view}" href="#">
                         </a>
 
                         <a href="#"
@@ -99,10 +91,7 @@
                            th:text="#{product.delete}" id="btn-delete">
                         </a>
 
-                        <a
-                                class="btn btn-info" id="btn-view"
-                                th:text="#{product.view}" href="#">
-                        </a>
+
 
                     </td>
                 </tr>
