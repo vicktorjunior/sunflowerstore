@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-8">
-                    <h1 th:text="#{product.search}">
+                    <h1 th:text="#{sell.search}">
 
                     </h1>
                 </div>
@@ -30,20 +30,15 @@
 
         <form method="get" class="form-vertical">
 
-            <div class="form-group">
-                <label for="input-product-name" th:text="#{product.name}">Nome</label>
-                <input id="input-product-name" type="text" class="form-control">
-            </div>
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label th:text="#{product.pricesell}"></label>
+                        <label th:text="#{sell.period}"></label>
 
                         <div class="form-inline">
-                            <input type="text" class="form-control  aw-form-control-inline-sm" placeholder="R$">
+                            <input type="date" class="form-control  aw-form-control-inline-sm">
                             <label class="aw-form-label-between" th:text="#{between}"></label>
-                            <input type="text" class="form-control  aw-form-control-inline-sm" placeholder="R$">
+                            <input type="date" class="form-control  aw-form-control-inline-sm">
                         </div>
                     </div>
                 </div>
@@ -70,7 +65,7 @@
         </form>
 
         <span th:if="${#lists.isEmpty(sells)}"
-              th:text="#{product.listisempty}"> </span> <!-- TODO: RNG009 MSG006-->
+              th:text="#{sell.nosells}"> </span> <!-- TODO: RNG009 MSG006-->
         <div class="box-body table-responsive no-padding"
              th:if="!${#lists.isEmpty(sells)}">
             <table class="table table-hover cell-border" id="datatable">
