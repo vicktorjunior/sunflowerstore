@@ -71,6 +71,10 @@ public class SellController {
         /*System.out.println(item.getSell().getCode());
         System.out.println(item.getQtd());*/
         sellService.add(item.getSell(),item);
+        Integer quantity = item.getQtd();
+        Long id = item.getProduct().getCode();
+
+        productService.removeQtd(id,quantity);
 
         return "redirect:/sell/new22/" + item.getSell().getCode();
     }

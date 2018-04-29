@@ -72,6 +72,15 @@ public class ProductService {
 		return productRepository.getOne(id);
 	}
 
+	public void removeQtd(Long id, Integer qtd) {
+	    Product product = productRepository.getOne(id);
+	    Integer quantity = product.getQtd();
+	    Integer diff = quantity-qtd;
+
+	    product.setQtd(diff);
+	    productRepository.save(product);
+    }
+
 	public void sendMessage(Product product) {
 		SimpleMailMessage mail = new SimpleMailMessage();
 

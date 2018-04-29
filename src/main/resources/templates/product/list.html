@@ -79,6 +79,7 @@
                     <th th:if="${action=='list'}"
                         th:text="#{product.list.id}"></th>
                     <th th:text="#{product.list.name}"></th>
+                    <th th:text="#{product.qtd}"></th>
                     <th th:text="#{product.list.supplier}"></th>
                     <th th:text="#{product.list.buyingPrice}"></th>
                     <th th:text="#{product.list.options}"></th> <!--TODO: RNG001-->
@@ -89,6 +90,7 @@
                     <td th:if="${action=='list'}"
                         th:text="${product.getCode()}"></td>
                     <td th:text="${product.getName()}"></td>
+                    <td th:text="${product.getQtd()}"></td>
                     <td th:text="${product.getSupplier().getName()}"></td>
                     <td class="js-decimal" th:text="${product.getBuyingPrice()}"></td>
 
