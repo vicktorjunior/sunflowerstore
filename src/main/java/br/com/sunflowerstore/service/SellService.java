@@ -67,7 +67,6 @@ public class SellService {
     }
 
     public void cancelSell(Sell sell) {
-        System.out.println(sell.getCode());
         sellRepository.delete(sell);
     }
 
