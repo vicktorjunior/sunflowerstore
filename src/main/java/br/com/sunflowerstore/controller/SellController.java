@@ -42,8 +42,10 @@ public class SellController {
         }
     }
 
-    @RequestMapping("new2")
-    public ModelAndView newSell2(Model model, @ModelAttribute("sell2") Sell sell) {
+
+
+    @RequestMapping("new")
+    public ModelAndView newSell(Model model, @ModelAttribute("sell") Sell sell) {
         //sell = new Sell();
         if(sell.getCode()==0L) {
             sell = sellService.save(sell);
@@ -56,7 +58,7 @@ public class SellController {
 
         List<ItemSell> itemSells = new ArrayList<ItemSell>();
 
-        ModelAndView mv = new ModelAndView("sell/new2");
+        ModelAndView mv = new ModelAndView("sell/new");
         model.addAttribute("sell",sell);
         mv.addObject("produtos", productService.listInStock());
         mv.addObject("items",itemSells);
@@ -65,31 +67,7 @@ public class SellController {
         return mv;
     }
 
-
-    @RequestMapping(value = "add2",method = RequestMethod.POST)
-    public String add2(@ModelAttribute("item") ItemSell item) {
-        /*System.out.println(item.getSell().getCode());
-        System.out.println(item.getQtd());*/
-        sellService.add(item.getSell(),item);
-        Integer quantity = item.getQtd();
-        Long id = item.getProduct().getCode();
-
-        productService.removeQtd(id,quantity);
-
-        return "redirect:/sell/new22/" + item.getSell().getCode();
-    }
-
-    @RequestMapping(value = "total/{sell}/{total}", method = RequestMethod.GET, produces = {MimeTypeUtils.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> total(@PathVariable("total") BigDecimal total, @PathVariable("sell") Long sell) {
-        try {
-            sellService.getOne(sell).setTotalSell(total);
-            return new ResponseEntity<String>("/sell/new2" ,HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @RequestMapping(value = "new22/{code}")
+    @RequestMapping(value = "new/{code}")
     public ModelAndView new2(@PathVariable Long code, Model model) {
 
         ItemSell item = new ItemSell();
@@ -100,9 +78,36 @@ public class SellController {
         model.addAttribute("item",item);
         model.addAttribute("produtos", productService.listInStock());
 
-        return new ModelAndView("sell/new2");
+        return new ModelAndView("sell/new");
 
     }
+
+
+
+    @RequestMapping(value = "add",method = RequestMethod.POST)
+    public String add2(@ModelAttribute("item") ItemSell item) {
+        /*System.out.println(item.getSell().getCode());
+        System.out.println(item.getQtd());*/
+        sellService.add(item.getSell(),item);
+        Integer quantity = item.getQtd();
+        Long id = item.getProduct().getCode();
+
+        productService.removeQtd(id,quantity);
+
+        return "redirect:/sell/new/" + item.getSell().getCode();
+    }
+
+    @RequestMapping(value = "total/{sell}/{total}", method = RequestMethod.GET, produces = {MimeTypeUtils.TEXT_PLAIN_VALUE})
+    public ResponseEntity<String> total(@PathVariable("total") BigDecimal total, @PathVariable("sell") Long sell) {
+        try {
+            sellService.getOne(sell).setTotalSell(total);
+            return new ResponseEntity<String>("/sell/new" ,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 
     @RequestMapping(value = "deleteItem/{code}/{id}",method = RequestMethod.GET)
     public String deleteItem(@PathVariable Long id, @PathVariable Long code, Model model) {
@@ -125,7 +130,17 @@ public class SellController {
         //model.addAttribute("action", "list");
         //System.out.println("passou reto");
         return new ModelAndView("sell/list");
-    };
+    }
+
+
+    @RequestMapping("cancel/{code}")
+    public String cancel(@PathVariable Long code) {
+        Sell s = sellService.getOne(code);
+        sellService.cancelSell(s);
+
+        return "/";
+
+    }
 
 
 
