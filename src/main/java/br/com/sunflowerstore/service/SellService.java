@@ -66,4 +66,9 @@ public class SellService {
         itemSellRepository.delete(id);
     }
 
+    public void cancelSell(Sell sell) {
+        System.out.println(sell.getCode());
+        sellRepository.delete(sell);
+    }
+
 }
