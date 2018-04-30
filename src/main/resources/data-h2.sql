@@ -1,4 +1,4 @@
-/*
+
 -- EMPLOYEE PHOTOS
 insert into file(id, content) values
 (0,  FILE_READ('./src/main/resources/static/photos/face.jpg'));
@@ -36,4 +36,4 @@ insert into product (nickname, name, description, buying_date, category, codigo_
 
 
 
-*/
+
