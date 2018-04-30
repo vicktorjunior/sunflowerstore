@@ -47,7 +47,7 @@ public class ProductController {
 		try {
 			productService.save(product);
 		} catch(ProductAlreadyExistsException e) {
-			result.rejectValue("nome", e.getMessage(), e.getMessage());
+			result.rejectValue("name", e.getMessage(), e.getMessage());
 			return newProduct(product);
 		}
 		//productService.sendMessage(product);
